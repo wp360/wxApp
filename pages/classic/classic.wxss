@@ -1,0 +1,29 @@
+/* pages/classic/classic.wxss */
+.chunk {
+  /* display: inline-block; */
+  width: 100px;
+  height: 100px;
+}
+
+/*flex flexible box 弹性盒子*/
+.container {
+  display: flex;
+  flex-direction: row; /*row 行 column 列 row-reverse 倒序*/
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  /*flex-start center space-between space-around*/
+  background-color: grey;
+}
+
+.color1 {
+  background-color: brown;
+}
+
+.color2 {
+  background-color: aqua;
+}
+
+.color3 {
+  background-color: blue;
+}
