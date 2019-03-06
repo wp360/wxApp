@@ -1,18 +1,47 @@
 // pages/classic/classic.js
+import {HTTP} from '../../util/http.js'
+let http = new HTTP()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    test: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(this.data.test)
+    http.request({
+      url: '/classic/latest',
+      success: (res)=> {
+        console.log(res)
+      }
+    })
+    // let that = this
+    // let data = wx.request({
+    //   url: 'http://bl.7yue.pro/v1/classic/latest',
+    //   header: {
+    //     appkey: 'K5H3SiFRY9qLzs0n'
+    //   },
+    //   success: function(res) {
+    //     console.log(res)
+    //     console.log(that.data.test)
+    //   }
+    // })
+    // let data = wx.request({
+    //   url: 'http://bl.7yue.pro/v1/classic/latest',
+    //   header: {
+    //     appkey: 'K5H3SiFRY9qLzs0n'
+    //   },
+    //   success: (res) => {
+    //     console.log(this.data.test)
+    //   }
+    // })
   },
 
   /**
