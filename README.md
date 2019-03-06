@@ -1,4 +1,3 @@
-"# wxApp"
 #### git 分支上传
 ```
 git checkout -b myApp
@@ -7,7 +6,7 @@ git status
 
 git add .
 
-git commit -m "add file"
+git commit -m "初始化"
 
 git push
 
