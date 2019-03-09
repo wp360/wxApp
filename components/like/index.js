@@ -25,8 +25,8 @@ Component({
     // 组件封装 内部、开发
     // like: true,
     // count: 9,
-    yesSrc: 'images/like.png',
-    noSrc: 'images/like@dis.png'
+    yesSrc: '../../images/like.png',
+    noSrc: '../../images/like@dis.png'
   },
 
   /**
