@@ -3,10 +3,11 @@
 // let http = new HTTP()
 
 import {ClassicModel} from '../../models/classic.js'
-let classic = new ClassicModel()
+import {LikeModel} from '../../models/like.js'
+let classicModel = new ClassicModel()
+let likeModel = new LikeModel()
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -19,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    classic.getLastest((res) => {
+    classicModel.getLastest((res) => {
       console.log(res)
       this.setData({
         classic: res
@@ -27,7 +28,7 @@ Page({
     })
     // console.log(this.data.test)
     // http.request({
-    //   url: '/classic/latest',
+    //   url: 'classic/latest',
     //   success: (res)=> {
     //     console.log(res)
     //   }
@@ -54,7 +55,11 @@ Page({
     //   }
     // })
   },
-
+  onLike: function(event) {
+    console.log(event)
+    let behavior = event.detail.behavior
+    likeModel.like(behavior,this.data.classic.id,this.data.classic.type)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

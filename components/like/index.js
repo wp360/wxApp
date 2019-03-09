@@ -25,8 +25,8 @@ Component({
     // 组件封装 内部、开发
     // like: true,
     // count: 9,
-    yesSrc: '../../images/like.png',
-    noSrc: '../../images/like@dis.png'
+    yesSrc: 'images/like.png',
+    noSrc: 'images/like@dis.png'
   },
 
   /**
@@ -42,6 +42,13 @@ Component({
         count: count,
         like: !like
       })
+
+      // 自定义事件
+      let behavior = this.properties.like?'like':'cancel'
+      // 激活
+      this.triggerEvent('like',{
+        behavior: behavior
+      },{})
     }
   }
 })
