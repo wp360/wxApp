@@ -21,11 +21,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 数据更新  Storage
     classicModel.getLastest((res) => {
       console.log(res)
       this.setData({
         classic: res
       })
+      // latestClassic latestIndex currentClassic currentIndex
     })
     // console.log(this.data.test)
     // http.request({
@@ -63,11 +65,27 @@ Page({
   },
 
   onNext: function(event) {
-
+    let index = this.data.classic.index
+    classicModel.getNext(index, (res) => {
+      console.log(res)
+      this.setData({
+        classic: res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
+      })
+    })
   },
 
   onPrevious: function (event) {
-
+    let index = this.data.classic.index
+    classicModel.getPrevious(index,(res)=>{
+      console.log(res)
+      this.setData({
+        classic: res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
