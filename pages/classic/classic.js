@@ -65,20 +65,16 @@ Page({
   },
 
   onNext: function(event) {
-    let index = this.data.classic.index
-    classicModel.getNext(index, (res) => {
-      console.log(res)
-      this.setData({
-        classic: res,
-        latest: classicModel.isLatest(res.index),
-        first: classicModel.isFirst(res.index)
-      })
-    })
+    this._updateClassic('next')
   },
 
   onPrevious: function (event) {
+    this._updateClassic('previous')
+  },
+
+  _updateClassic: function (nextOrPrevious) {
     let index = this.data.classic.index
-    classicModel.getPrevious(index,(res)=>{
+    classicModel.getClassic(index, nextOrPrevious, (res) => {
       console.log(res)
       this.setData({
         classic: res,
