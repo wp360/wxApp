@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    books: []
     // callback
     // promise
     // async await ES2017 小程序目前不支持
@@ -22,31 +23,12 @@ Page({
     // 正确用法
     bookModel.getHotList()
       .then(res => {
-        console.log(res)
-        return bookModel.getMyBookCount()
+        // console.log(res)
+        this.setData({
+          books: res
+        })
+        // this.data.books = res
       })
-      .then(res=>{
-        console.log(res)
-        return bookModel.getMyBookCount()
-      })
-      .then(res => {
-        console.log(res)
-      })
-    // 错误用法
-    // const hotList = bookModel.getHotList()
-    // hotList.then(
-    //   res => {
-    //     console.log(res)
-    //     bookModel.getMyBookCount()
-    //       .then(res => {
-    //         console.log(res)
-    //         bookModel.getMyBookCount()
-    //           .then(res => {
-    //             console.log(res)
-    //           })
-    //       })
-    //   }
-    // )
     // Promise 对象 函数
     // 对象 保持状态 函数
     // Promise 第一步
