@@ -13,7 +13,8 @@ Page({
     comments: [],
     detail: null,
     likeStatus: false,
-    likeCount: 0
+    likeCount: 0,
+    posting: false
   },
 
   /**
@@ -53,7 +54,11 @@ Page({
     const like_or_cancel = event.detail.behavior
     likeModel.like(like_or_cancel, this.data.book.id,400)
   },
-
+  onFakePost(event) {
+    this.setData({
+      posting: true
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

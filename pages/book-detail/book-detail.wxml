@@ -43,12 +43,21 @@
       </view>
   </view>
 </view>
-<!-- 短评 -->
+<!-- 短评输入 -->
 <view class="post-container">
-  <view class="post-fake">
+  <view bind:tap="onFakePost" class="post-fake">
     <text>输入短评</text>
   </view>
   <view class="like-container">
     <v-like bind:like="onLike" class="like" like="{{likeStatus}}" count="{{likeCount}}" />
   </view>
+</view>
+<!-- 短评页面 -->
+<view class="posting-container">
+    <view class="post-header">
+        <text>仅可点击标签+1</text>
+        <text class="cancel">取消</text>
+    </view>
+    <view class="comment-container"></view>
+    <input class="post" placeholder='短评最多12个字'></input>
 </view>
