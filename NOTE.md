@@ -63,3 +63,45 @@ Component({
   background-color: #eefbff !important;
 }
 ```
+
+#### wxs的使用
+```
+// wxs 可以当做过滤器
+var format = function(text) {
+  // wxs
+  if(!text){
+    return
+  }
+  var reg = getRegExp('\\\\n','g')
+  return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+}
+
+module.exports = {
+  format: format
+}
+
+<!-- 页面调用 -->
+<!--pages/book-detail/book-detail.wxml-->
+<wxs src="../../util/filter.wxs" module="util" />
+<!--省略-->
+<view class="sub-container">
+  <text class="headline">内容简介</text>
+  <text class="content" decode="true">{{util.format(book.summary)}}</text>
+</view>
+
+******************************
+也可以页面直接使用
+<wxs module="util">
+  var fomat = function(text) {
+    // ...省略
+  }
+  module.exports = {
+    fomat: fomat
+  }
+<wxs>
+```
+
+#### regexp正则
+[https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxs/06datatype.html](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxs/06datatype.html)
+
+> 语法 生成 regexp 对象需要使用 getRegExp函数。 getRegExp(pattern[, flags])
