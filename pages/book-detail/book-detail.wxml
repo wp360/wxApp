@@ -58,7 +58,7 @@
 <!-- 短评页面 -->
 <view class="posting-container" wx:if="{{posting}}">
     <view class="post-header">
-        <text wx:if="{{comments}}">仅可点击标签+1</text>
+        <text wx:if="{{comments.length!==0}}">仅可点击标签+1</text>
         <text wx:else>暂无短评</text>
         <text bind:tap="onCancel" class="cancel">取消</text>
     </view>

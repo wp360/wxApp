@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    books: []
+    books: [],
+    searching: false
     // callback
     // promise
     // async await ES2017 小程序目前不支持
@@ -52,7 +53,16 @@ Page({
     //   console.log(error)
     // })
   },
-
+  onSearching(event) {
+    this.setData({
+      searching: true
+    })
+  },
+  onCancel(event) {
+    this.setData({
+      searching: false
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

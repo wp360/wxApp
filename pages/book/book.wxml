@@ -2,9 +2,9 @@
 <!--列表渲染-->
 <!--for 循环 wx:for-->
 
-<view class="container">
+<view class="container" wx:if="{{!searching}}">
   <view class="header">
-    <view class="box">
+    <view class="box" bind:tap="onSearching">
       <image src="/images/icon/search.png" />
       <text>搜索书籍</text>
     </view>
@@ -18,3 +18,5 @@
     </view>
   </view>
 </view>
+
+<v-search wx:if="{{searching}}" bind:cancel="onCancel" />

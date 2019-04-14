@@ -21,6 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading()
     // id
     const bid = options.bid
     // console.log(bid)
@@ -28,27 +29,39 @@ Page({
     const comments = bookModel.getComments(bid)
     const likeStatus = bookModel.getLikeStatus(bid)
 
-    detail.then(res=> {
-      console.log(res)
+    Promise.all([detail, comments, likeStatus])
+    .then(res=>{
+      // console.log(res)
       this.setData({
-        book: res
+        book: res[0],
+        comments: res[1].comments,
+        likeStatus: res[2].like_status,
+        likeCount: res[2].fav_nums
       })
+      wx.hideLoading()
     })
 
-    comments.then(res => {
-      console.log(res)
-      this.setData({
-        comments: res.comments
-      })
-    })
+    // detail.then(res=> {
+    //   console.log(res)
+    //   this.setData({
+    //     book: res
+    //   })
+    // })
 
-    likeStatus.then(res => {
-      console.log(res)
-      this.setData({
-        likeStatus: res.like_status,
-        likeCount: res.fav_nums
-      })
-    })
+    // comments.then(res => {
+    //   console.log(res)
+    //   this.setData({
+    //     comments: res.comments
+    //   })
+    // })
+
+    // likeStatus.then(res => {
+    //   console.log(res)
+    //   this.setData({
+    //     likeStatus: res.like_status,
+    //     likeCount: res.fav_nums
+    //   })
+    // })
   },
   onLike(event) {
     const like_or_cancel = event.detail.behavior
