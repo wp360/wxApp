@@ -1,8 +1,8 @@
-class KeyWordModel{
+class KeywordModel{
   key = 'q'
   maxLength = 10
   getHistory() {
-    return wx.getStorageSync(this.key)
+    const words = wx.getStorageSync(this.key)
     if(!words) {
       return []
     }
@@ -27,4 +27,8 @@ class KeyWordModel{
       wx.setStorageSync(this.key, words)
     }
   }
+}
+
+export {
+  KeywordModel
 }
