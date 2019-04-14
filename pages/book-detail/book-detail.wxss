@@ -65,13 +65,21 @@
   font-size: 22rpx;
   color: #aaa;
 }
-
-.comment-container>v-tag:nth-child(1)>view{
+/* 子元素选择器 后代选择器 */
+/* .comment-container>v-tag:nth-child(1)>view{
   background-color: #fffbdd;
 }
 
 .comment-container>v-tag:nth-child(2)>view {
   background-color: #eefbff;
+} */
+
+.ex-tag1 {
+  background-color: #fffbdd ! important;
 }
 
-/* 子元素选择器 后代选择器 */
+.ex-tag2 {
+  background-color: #eefbff !important;
+}
+
+
