@@ -124,6 +124,6 @@ Page({
       // more: true
       more: random(16)
     })
-    console.log(random(16))
+    // console.log(random(16))
   }
 })
