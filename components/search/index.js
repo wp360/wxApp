@@ -12,9 +12,9 @@ Component({
    */
   properties: {
     more: {
-      type: String
-    },
-    observer: '_load_more'
+      type: String,
+      observer: 'loadMore'
+    }
   },
 
   /**
@@ -25,7 +25,8 @@ Component({
     hotWords: [],
     dataArray: [],
     searching: false,
-    q: ''
+    q: '',
+    loading: false
   },
   attached() {
     // const historyWords = keywordModel.getHistory()
@@ -43,8 +44,27 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    _load_more() {
-      console.log('下拉')
+    loadMore() {
+      // console.log(this.data.q)
+      if(!this.data.q) {
+        return
+      }
+      if(this.data.loading) {
+        return
+      }
+      // 一次只发送一个请求
+      // 锁
+      const length = this.data.dataArray.length
+      console.log(length)
+      this.data.loading = true
+      bookModel.search(length,this.data.q).then(res=> {
+        const tempArray = this.data.dataArray.concat(res.books)
+        this.setData({
+          dataArray: tempArray,
+          // loading: false
+        })
+        this.data.loading = false
+      })
     },
     onCancel(event) {
       this.triggerEvent('cancel',{},{})
