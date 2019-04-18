@@ -105,3 +105,7 @@ module.exports = {
 [https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxs/06datatype.html](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxs/06datatype.html)
 
 > 语法 生成 regexp 对象需要使用 getRegExp函数。 getRegExp(pattern[, flags])
+
+
+#### 参考笔记
+[微信小程序 补充一发笔记](https://www.jianshu.com/p/7571cdaea370)

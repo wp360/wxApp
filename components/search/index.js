@@ -33,7 +33,8 @@ Component({
     // dataArray: [],
     searching: false,
     q: '',
-    loading: false
+    loading: false,
+    loadingCenter: false
   },
   attached() {
     // const historyWords = keywordModel.getHistory()
@@ -75,13 +76,17 @@ Component({
           // })
           // this.data.loading = false
           this._unLocked()
+        }, () => {
+          this._unLocked() // 避免死锁状态
         })
       }
     },
     onCancel(event) {
+      this.initialize()
       this.triggerEvent('cancel', {}, {})
     },
     onDelete(event) {
+      this.initialize()
       this._closeResult()
       // this.setData({
       //   searching: false
@@ -89,18 +94,20 @@ Component({
     },
     onConfirm(event) {
       this._showResult()
-      this.initialize()
+      this._showLoadingCenter()
+      // this.initialize()
       // 获取用户输入的关键字
       const q = event.detail.value || event.detail.text
+      this.setData({
+        // dataArray: res.books,
+        q
+      })
       bookModel.search(0, q)
         .then(res => {
           this.setMoreData(res.books)
           this.setTotal(res.total)
-          this.setData({
-            // dataArray: res.books,
-            q
-          })
           keywordModel.addToHistory(q)
+          this._hideLoadingCenter()
         })
     },
     _showResult() {
@@ -110,17 +117,32 @@ Component({
     },
     _closeResult() {
       this.setData({
-        searching: false
+        searching: false,
+        q: ''
       })
     },
     _isLocked() {
       return this.data.loading ? true : false
     },
     _locked() {
-      this.data.loading = true
+      this.setData({
+        loading: true
+      })
     },
     _unLocked() {
-      this.data.loading = false
+      this.setData({
+        loading: false
+      })
+    },
+    _showLoadingCenter() {
+      this.setData({
+        loadingCenter: true
+      })
+    },
+    _hideLoadingCenter() {
+      this.setData({
+        loadingCenter: false
+      })
     }
     // scroll-view | Page onReachBottom
   }
