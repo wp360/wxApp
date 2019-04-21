@@ -57,7 +57,7 @@ Component({
       if (!this.data.q) {
         return
       }
-      if (this._isLocked()) {
+      if (this.isLocked()) {
         return
       }
       // 一次只发送一个请求
@@ -65,7 +65,7 @@ Component({
       // const length = this.data.dataArray.length
       // console.log(length)
       if (this.hasMore()) {
-        this._locked()
+        this.locked()
         // this.data.loading = true
         bookModel.search(this.getCurrentStart(), this.data.q).then(res => {
           // const tempArray = this.data.dataArray.concat(res.books)
@@ -75,9 +75,9 @@ Component({
           //   // loading: false
           // })
           // this.data.loading = false
-          this._unLocked()
+          this.unLocked()
         }, () => {
-          this._unLocked() // 避免死锁状态
+          this.unLocked() // 避免死锁状态
         })
       }
     },
@@ -119,19 +119,6 @@ Component({
       this.setData({
         searching: false,
         q: ''
-      })
-    },
-    _isLocked() {
-      return this.data.loading ? true : false
-    },
-    _locked() {
-      this.setData({
-        loading: true
-      })
-    },
-    _unLocked() {
-      this.setData({
-        loading: false
       })
     },
     _showLoadingCenter() {

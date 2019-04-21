@@ -2,7 +2,8 @@ const paginationBev = Behavior({
   data: {
     dataArray: [],
     total: null,
-    noneResult: false
+    noneResult: false,
+    loading: false
   },
   methods: {
     setMoreData(dataArray) {
@@ -16,7 +17,7 @@ const paginationBev = Behavior({
     },
     setTotal(total) {
       this.data.total = total
-      if(total === 0) {
+      if (total === 0) {
         this.setData({
           noneResult: true
         })
@@ -25,7 +26,7 @@ const paginationBev = Behavior({
     // 是否还有更多的数据需要加载
     hasMore() {
       // total
-      if(this.data.dataArray.length >= this.data.length) {
+      if (this.data.dataArray.length >= this.data.length) {
         return false
       } else {
         return true
@@ -35,9 +36,23 @@ const paginationBev = Behavior({
       // this.data.dataArray = []
       this.setData({
         dataArray: [],
-        noneResult: false
+        noneResult: false,
+        loading: false
       })
       this.data.total = null
+    },
+    isLocked() {
+      return this.data.loading ? true : false
+    },
+    locked() {
+      this.setData({
+        loading: true
+      })
+    },
+    unLocked() {
+      this.setData({
+        loading: false
+      })
     }
   }
 })
