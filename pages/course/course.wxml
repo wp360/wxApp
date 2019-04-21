@@ -1,0 +1,6 @@
+<!-- <image class="img" src="/images/my/course.png"></image> -->
+<view class="container">
+  <text class="txt">
+    学习课程页面
+  </text>
+</view>

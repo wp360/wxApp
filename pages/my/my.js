@@ -1,11 +1,18 @@
 // pages/my/my.js
+import {ClassicModel} from '../../models/classic'
+import {BookModel} from '../../models/book'
+
+const classicModel = new ClassicModel()
+const bookModel = new BookModel()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    authorized: false,
+    userInfo: null
   },
 
   /**
@@ -19,6 +26,7 @@ Page({
     //   }
     // })
     this.userAuthorized()
+    this.getMyBookCount()
   },
   userAuthorized() {
     wx.getSetting({
@@ -27,7 +35,11 @@ Page({
         if(data.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: data => {
-              console.log(data)
+              // console.log(data)
+              this.setData({
+                authorized: true,
+                userInfo: data.userInfo
+              })
             }
           })
         } else {
@@ -41,7 +53,31 @@ Page({
   },
   onGetUserInfo(event) {
     const userInfo = event.detail.userInfo
-    console.log(userInfo)
+    // console.log(userInfo)
+    if (userInfo) {
+      this.setData({
+        authorized: true,
+        userInfo
+      })
+    }
+  },
+  onJumpToAbout(event) {
+    wx.navigateTo({
+      url: '/pages/about/about'
+    })
+  },
+  onStudy(event) {
+    wx.navigateTo({
+      url: '/pages/course/course'
+    })
+  },
+  getMyBookCount() {
+    bookModel.getMyBookCount()
+    .then(res=>{
+      this.setData({
+        bookCount: res.count
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

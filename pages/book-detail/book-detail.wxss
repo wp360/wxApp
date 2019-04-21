@@ -136,8 +136,9 @@
 
 /*书籍点赞*/
 .like {
-  margin-right: 30rpx;
+  /* margin-right: 30rpx; */
   margin-top: 10rpx;
+  margin-left: 20rpx;
 }
 
 .like-container {
@@ -199,4 +200,23 @@
 
 .shadow {
   color: #999;
+}
+
+/*分享*/
+.like-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 30rpx;
+}
+
+.share-btn {
+  margin-top: 28rpx;
+  margin-left: 10rpx;
+}
+
+.share {
+  width: 40rpx;
+  height: 40rpx;
 }
