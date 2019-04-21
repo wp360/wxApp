@@ -12,7 +12,9 @@ Page({
    */
   data: {
     authorized: false,
-    userInfo: null
+    userInfo: null,
+    bookCount: 0,
+    classics: null
   },
 
   /**
@@ -27,6 +29,7 @@ Page({
     // })
     this.userAuthorized()
     this.getMyBookCount()
+    this.getMyFavor()
   },
   userAuthorized() {
     wx.getSetting({
@@ -69,6 +72,13 @@ Page({
   onStudy(event) {
     wx.navigateTo({
       url: '/pages/course/course'
+    })
+  },
+  getMyFavor() {
+    classicModel.getMyFavor(res=>{
+      this.setData({
+        classics: res
+      })
     })
   },
   getMyBookCount() {

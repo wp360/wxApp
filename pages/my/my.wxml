@@ -23,6 +23,14 @@
     <!-- 用户授权 -->
     <!-- 不需要授权方法 open-data组件 -->
   </view>
+  <view class="like-container">
+    <image class="headline" src="/images/my/like.png" />
+    <view class="preview-container">
+      <block wx:for="{{classics}}" wx:key="">
+        <v-preview bind:tapping="onJumpToDetail" class="preview" classic="{{item}}" />
+      </block>
+    </view>
+  </view>
   <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</button> -->
 </view>
 <image bind:tap="onStudy" class="study" src="/images/my/study.png" />
