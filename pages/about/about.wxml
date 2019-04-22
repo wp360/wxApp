@@ -1,4 +1,9 @@
-<image class="about"  />
-<navigator class="nav" target="miniProgram" app-id="wx8ffc97ad5bcccc89" open-type="navigate">
-  <image class="vendor" src="/images/my/vendor.png"></image>
-</navigator>
+<view class="container">
+  <view class="panel-heading">个人介绍</view>
+  <view class="list-group-item">熟练 HTML/HTML5、CSS/CSS3、JavaScript、Jquery、BootStrap框架等前端 WEB 开发技术</view>
+  <view class="list-group-item">熟练使用Ajax、json进行前后台数据交互</view>
+  <view class="list-group-item">熟悉H5移动页面制作，对于H5移动混合开发也有所了解</view>
+  <view class="list-group-item">熟悉MVVM、MVC模式，使用vue全家桶开发项目</view>
+  <view class="list-group-item">熟悉Git版本控制工具及Webpack打包工具的使用</view>
+  <view class="list-group-item">了解PHP和nodejs基础知识</view>
+</view>
