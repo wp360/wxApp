@@ -1,0 +1,7 @@
+<!-- pages/home/home.wxml -->
+<!-- 导航条 -->
+<view class="navbar">
+  <text wx:for="{{navbars}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
+    {{item.navbarName}}
+  </text>
+</view>
