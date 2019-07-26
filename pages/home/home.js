@@ -11,7 +11,13 @@ Page({
    */
   data: {
     navbars: null,
-    currentTab: 0
+    currentTab: 0,
+    // 轮播初始化数据
+    banners: null,
+    indicatorDots: true, //是否显示面板指示点
+    autoplay: true, //是否自动切换
+    interval: 3000, //自动切换时间间隔,3s
+    duration: 1000 //  滑动动画时长1s
   },
   // 导航切换监听
   navbarTap: function (e) {
@@ -25,8 +31,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    //加载navbar导航条
+    // 加载navbar导航条
     that.navbarShow();
+    // 页面初始化加载轮播数据函数
+    // 加载banner轮播
+    that.bannerShow();
   },
   // ajax获取导航数据
   navbarShow: function (success) {
@@ -37,6 +46,20 @@ Page({
       success: data => {
         that.setData({
           navbars: data.result
+        })
+        console.log(data.result)
+      }
+    })
+  },
+  // ajax获取轮播数据
+  bannerShow: function (success) {
+    var that = this;
+    ajax.request({
+      method: 'GET',
+      url: 'home/banners?key=' + utils.key,
+      success: data => {
+        that.setData({
+          banners: data.result
         })
         console.log(data.result)
       }

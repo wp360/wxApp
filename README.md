@@ -228,3 +228,18 @@ Page({
   }
 })
 ```
+## 电商首页轮播、分类导航和新品特卖实现
+1. 首页轮播模块实现
+[参考小程序swiper组件的使用：https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)
+```home.wxml
+<!-- 首页轮播 banner -->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{banners}}">
+    <swiper-item>
+      <image src="{{item.imgUrl}}" mode="widthFix" />
+    </swiper-item>
+  </block>
+</swiper>
+```
+#### mode="widthFix"相关问题
+[关于小程序widthFix图片高度不能自适应的问题](https://www.jianshu.com/p/0d0a0c7da4d3)

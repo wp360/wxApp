@@ -9,13 +9,13 @@ page {
     flex: none;
     display: flex;
     background: #fff;
+    height: 100rpx;
 }
 
 .navbar .item {
     position: relative;
     flex: auto;
     text-align: center;
-    line-height: 80rpx;
     font-size: 14px;
 }
 
@@ -34,4 +34,14 @@ page {
     right: 0;
     height: 6rpx;
     background: #f0145a;
+}
+
+/* 直接设置swiper属性 */
+swiper {
+    height: 300rpx;
+}
+
+swiper-item image {
+    width: 100%;
+    height: 100%;
 }
