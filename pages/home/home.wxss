@@ -45,3 +45,115 @@ swiper-item image {
     width: 100%;
     height: 100%;
 }
+
+/*=================分类导航====================*/
+.navs {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nav-item {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 20rpx; */
+    padding-top: 20rpx;
+}
+
+.nav-item .nav-image {
+    width: 80rpx;
+    height: 80rpx;
+    /* border-radius: 50%;设置边界圆角 */
+}
+
+.nav-item text {
+    padding-top: 20rpx;
+    font-size: 25rpx;
+}
+
+/*=================新品特卖 样式====================*/
+.category-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20rpx;
+    margin-bottom: 0rpx;
+    padding: 0px 10px;
+
+}
+
+.category-title .title {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.category-title .line_name {
+    font-size: 10px;
+    color: #98989f;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 分割线 */
+.separate {
+    height: 15rpx;
+    background-color: #f2f2f2;
+}
+
+.category-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25rpx;
+    margin-bottom: 0rpx;
+}
+
+.category-title .name {
+    font-size: 40rpx;
+    text-align: center;
+    margin: 10rpx auto;
+}
+
+.line_flag {
+    width: 80rpx;
+    height: 1rpx;
+    display: inline-block;
+    margin: 20rpx auto;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+.line {
+    width: 100%;
+    height: 2rpx;
+    display: inline-block;
+    margin: 20rpx 0rpx;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+.head-img {
+    width: 100%;
+}
+
+.brand-name {
+    font-weight: 600;
+    font-size: 32rpx;
+}
+
+.activity-logo {
+    width: 35rpx;
+    height: 35rpx;
+    margin-right: 10rpx;
+    /* position: absolute; */
+}
+
+.pms {
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    color: #5771a8;
+}

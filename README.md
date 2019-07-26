@@ -243,3 +243,104 @@ Page({
 ```
 #### mode="widthFix"相关问题
 [关于小程序widthFix图片高度不能自适应的问题](https://www.jianshu.com/p/0d0a0c7da4d3)
+
+## 首页分类导航实现
+1. 页面制作
+```wxml
+<!-- 分类导航 -->
+ <view>
+  <view class="navy">
+    <block wx:for-items="{{menus}}" wx:key="name">
+      <view class="nav-item"  data-type="{{item.menuName}}" data-typeid="{{item.id}}">
+        <image src="{{item.imgUrl}}" class="nav-image" />
+        <text>{{item.menuName}}</text>
+      </view>
+    </block>
+  </view>
+ </view> 
+```
+2. 样式添加
+```wxss
+/*=================分类导航====================*/
+.navs {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nav-item {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 20rpx; */
+    padding-top: 20rpx;
+}
+
+.nav-item .nav-image {
+    width: 80rpx;
+    height: 80rpx;
+    /* border-radius: 50%;设置边界圆角 */
+}
+
+.nav-item text {
+    padding-top: 20rpx;
+    font-size: 25rpx;
+}
+```
+3. 数据生成
+```js
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    menus: null //分类导航数据
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    // 加载menu分类导航菜单
+    that.menuShow();
+  },
+  // ajax获取分类导航数据
+  menuShow: function(success) {
+    var that = this;
+    ajax.request({
+      method: 'GET',
+      url: 'home/menus?key='+ utils.key,
+      success: data => {
+        that.setData({
+          menus: data.result
+        })
+        console.log(data.result)
+      }
+    })
+  }
+})
+```
+## 首页新品特卖模块实现
+1. 页面制作
+```wxml
+<!-- 新品特卖 -->
+<view class="separate"></view>
+<view class="cate-container">
+  <view class="category-title">
+    <text class="name">新品特卖</text>
+    <view class="line_flag"></view>
+    <block wx:for-items="{{brands}}" wx:key="id">
+      <navigator url="/pages/detail/detail">
+        <image class="head-img" src="{{item.imgUrl}}" mode="widthFix"></image>
+      </navigator>
+      <text class="brand-name">{{item.name}}</text>
+      <view class='pas'>
+        <image class="activity-logo" src="../../images/activity_logo.png" mode="widthFix"></image>
+        {{item.remark}}
+      </view>
+    </block>
+  </view>
+</view>
+```

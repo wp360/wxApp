@@ -17,7 +17,10 @@ Page({
     indicatorDots: true, //是否显示面板指示点
     autoplay: true, //是否自动切换
     interval: 3000, //自动切换时间间隔,3s
-    duration: 1000 //  滑动动画时长1s
+    duration: 1000, //  滑动动画时长1s
+    // 页面初始化分类导航数据
+    menus: null, //分类导航数据
+    brands: null, //新品特卖数据
   },
   // 导航切换监听
   navbarTap: function (e) {
@@ -36,6 +39,10 @@ Page({
     // 页面初始化加载轮播数据函数
     // 加载banner轮播
     that.bannerShow();
+    // 加载menu分类导航菜单
+    that.menuShow();
+    // 加载新品特卖
+    that.brandShow();
   },
   // ajax获取导航数据
   navbarShow: function (success) {
@@ -62,6 +69,34 @@ Page({
           banners: data.result
         })
         console.log(data.result)
+      }
+    })
+  },
+  // ajax获取分类导航数据
+  menuShow: function (success) {
+    var that = this;
+    ajax.request({
+      method: 'GET',
+      url: 'home/menus?key=' + utils.key,
+      success: data => {
+        that.setData({
+          menus: data.result
+        })
+        console.log(data.result)
+      }
+    })
+  },
+  // ajax获取新品特卖数据
+  brandShow: function (success) {
+    var that = this;
+    ajax.request({
+      method: 'GET',
+      url: 'activity/brands?key=' + utils.key + '&type=temai&page=1&size=5',
+      success: data => {
+        that.setData({
+          brands: data.result.list
+        })
+        console.log("brands：" + data.result.list)
       }
     })
   },
