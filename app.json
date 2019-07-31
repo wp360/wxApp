@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/classify/index",
+    "pages/points/index",
+    "pages/shop-cart/index",
+    "pages/my/index",
+    "pages/detail/index",
+    "pages/news/index",
+    "pages/addressList/addressList",
+    "pages/address/address"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#eeeeee",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#358df4",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/footIcon1New.jpg",
+        "selectedIconPath": "images/footIcon1Newon.jpg"
+      },
+      {
+        "pagePath": "pages/classify/index",
+        "iconPath": "images/footIcon2New.jpg",
+        "selectedIconPath": "images/footIcon2Newon.jpg",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/points/index",
+        "iconPath": "images/footIcon3New.jpg",
+        "selectedIconPath": "images/footIcon3Newon.jpg",
+        "text": "积分"
+      },
+      {
+        "pagePath": "pages/shop-cart/index",
+        "iconPath": "images/footIcon4New.jpg",
+        "selectedIconPath": "images/footIcon4Newon.jpg",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "images/footIcon5New.jpg",
+        "selectedIconPath": "images/footIcon5Newon.jpg",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

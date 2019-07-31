@@ -1,0 +1,57 @@
+/* components/product/index.wxss */
+/*商品列表*/
+.product-detail-box .scroll_box {
+  height: 400rpx;
+}
+
+.product-detail-box .item_list {
+  padding-top: 30rpx;
+  border-bottom: 1px solid #ddd;
+}  
+
+.product-detail-box .product-title {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 32rpx;
+  height: 32rpx;
+  margin-top: 30rpx;
+  padding-left: 60rpx;
+}
+
+.product-detail-box .product_list{
+  width: 300rpx;
+  height: auto;
+  margin-right:24rpx;
+  display:inline-block;
+}
+
+.product-detail-box .product_list a {
+  display: block;
+  padding: 20rpx;
+}
+
+.product-detail-box .product_list image {
+  display: block;
+  width: 252rpx;
+  height: 252rpx;
+  margin: 0 auto 20rpx auto;
+}
+
+.product-detail-box .product_list .pro-price {
+  display: block;
+  text-align: center;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  color: #222;
+  line-height: 24rpx;
+}
+
+.product-detail-box .product_list .pro-name {
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 32rpx;
+  padding: 0 20rpx;
+  word-break: break-all;
+}

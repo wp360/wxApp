@@ -1,0 +1,117 @@
+/* components/topnav/index.wxss */
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100rpx;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid #d8e3e9;
+  position: relative;
+  z-index: 100;
+}
+
+.header .logo {
+  width: 199rpx;
+  height: 85rpx;
+  margin: 20rpx 0 0 20rpx;
+}
+
+.menu {
+  margin-right: 280rpx;
+}
+
+.menu image {
+  width: 48rpx;
+  height: 39rpx;
+  margin: 30rpx 0 0 0;
+}
+
+.menu .close-menu {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.dia-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 99;
+  padding-top: 200rpx;
+  box-sizing: border-box;
+}
+
+.dia-menu .item {
+  width: 50%;
+  height: 150rpx;
+  float: left;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  margin-bottom: 60rpx;
+}
+
+.dia-menu .item navigator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 150rpx;
+  margin: 0 auto;
+  line-height: 150rpx;
+  font-size: 28rpx;
+  color: #666;
+  padding-left: 1rem;
+  border: 1px solid #f6f6f6;
+  box-sizing: border-box;
+}
+
+.dia-menu .item .menu-img {
+  height: 54rpx;
+  line-height:150rpx;
+  display:inline-block;
+  margin-right:20rpx;
+}
+
+.dia-menu .item .item1 .menu-img {
+  width: 51rpx;
+}
+
+.dia-menu .item .item2 .menu-img {
+  width: 37rpx;
+}
+
+.dia-menu .item .item3 .menu-img {
+  width: 48rpx;
+}
+
+.dia-menu .item .item4 .menu-img {
+  width: 44rpx;
+}
+
+.dia-menu .item .item5 .menu-img {
+  width: 46rpx;
+}
+
+.dia-menu .contant {
+  position: absolute;
+  width: 120rpx;
+  left: 50%;
+  margin-left: -60rpx;
+  bottom: 60rpx;
+  color: #2658b2;
+  font-size: 28rpx;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.dia-menu .contant .contant-img {
+  position: absolute;
+  bottom: 60rpx;
+  left: 50%;
+  margin-left: -252rpx;
+  width: 503rpx;
+  height: 603rpx;
+}

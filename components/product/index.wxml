@@ -1,0 +1,17 @@
+<!--components/product/index.wxml-->
+<view class="item_list" wx:for="{{productsAllList}}" wx:key="*this">
+  <view class="product-title">
+    {{item.title}}
+  </view>
+  <view class="type-list swiper-wrapper scroll_box">
+    <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+      <view class="product_list" wx:for="{{item.data}}" wx:key="*this">
+        <navigator url="{{item.url}}">
+          <image src="{{item.image}}" />
+          <view class="pro-price">￥{{item.price}}</view>
+          <view class="pro-name">{{item.text}}</view>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+</view>

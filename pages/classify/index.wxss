@@ -1,0 +1,155 @@
+/* pages/classify/index.wxss */
+.header {
+  display: flex;
+  display: -webkit-flex;
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner image {
+  width: 100%;
+  height: 210rpx;
+}
+
+/*总体主盒子*/
+.container {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  color: #939393;
+}
+
+/*左侧栏主盒子*/
+.nav_left {
+  /*设置行内块级元素（没使用定位）*/
+  display: inline-block;
+  width: 200rpx;
+  height: 100%;
+  /*主盒子设置背景色为灰色*/
+  background: #f5f5f5;
+}
+
+/*左侧栏list的item*/
+.nav_left .classify-list>view {
+  height: 40px;
+  line-height: 40px;
+  padding: 5px 35rpx;
+  border-bottom: 1px solid #e1e1e1;
+  position: relative;
+  font-size: 32rpx;
+}
+
+.nav_left .classify-list>view:last-child {
+  border-bottom: none;
+}
+
+/*左侧栏list的item被选中时*/
+.nav_left .classify-list .active {
+  background: #fff;
+  color: #003893;
+}
+
+.nav_left .classify-list view icon {
+  display: block;
+  height: 70%;
+  width: 6rpx;
+  border-radius: 6rpx;
+  position: absolute;
+  top: 15%;
+  left: 6rpx;
+}
+
+.nav_left .classify-list .active icon {
+  background: #003893;
+}
+
+/*右侧栏主盒子*/
+.nav_right {
+  display: inline-block;
+  height: 100%;
+  width: 550rpx;
+  padding: 14rpx;
+  box-sizing: border-box;
+  background: #fff;
+  position: absolute;
+}
+
+/*右侧栏list的item*/
+.nav_right .title {
+  overflow: hidden;
+  padding-left: 20rpx;
+  background: #f7f7f9;
+  color: #999;
+  box-sizing: border-box;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+}
+
+.nav_right .item-cont navigator {
+  display: block;
+  width: 100%;
+  display: flexbox;
+  display: box;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -o-box;
+}
+
+.nav_right .classify-item .pro-img {
+  width: 160rpx;
+  height: 160rpx;
+  line-height: 160rpx;
+  display: block;
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.nav_right .classify-item .pro-img .image-border {
+  width: 160rpx;
+  position: absolute;
+  top: 24rpx;
+  left: 0;
+  z-index: 999999;
+}
+
+.nav_right .classify-item .pro-item {
+  display: block;
+  min-width: 360rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+  flex: 1;
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  padding-left: 20rpx;
+  padding-bottom: 30rpx;
+  font-size: 24rpx;
+}
+
+.nav_right .classify-item .pro-item .pro-name {
+  font-size: 28rpx;
+  color: #222;
+  line-height: 32rpx;
+}
+
+.nav_right .classify-item .pro-item .pro-price {
+  font-size: 32rpx;
+  color: #f15959;
+  line-height: 32rpx;
+  margin-top: 20rpx;
+}
+
+.nav_right .classify-item .pro-item .classify-point {
+  display: block;
+  color: #999;
+  margin: 30rpx 0 10rpx 0;
+}
+
+.nav_right .classify-item .pro-item .point-exchange {
+  margin-bottom: 30rpx;
+}

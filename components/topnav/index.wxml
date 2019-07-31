@@ -1,0 +1,21 @@
+<!--components/topnav/index.wxml-->
+<view class="header">
+  <navigator url="/">
+    <image class="logo" src="./images/logo.png" />
+  </navigator>
+  <view class="menu" bindtap="showMenu">
+    <image src="{{hidden?menuIcon:menuClose}}" class="{{hidden?'menu-icon':'close-menu'}}" />
+  </view>
+</view>
+<view hidden="{{hidden}}" class="dia-menu">
+    <view class="menulist">
+        <view class="item" wx:for="{{menuArr}}" wx:for-index="id" wx:key="id">
+          <navigator class="item{{id+1}}" url="item.url">
+            <image src="{{item.image}}" class="menu-img" />{{item.text}}
+          </navigator>
+        </view>
+    </view>
+    <view bindtap="showPic" class="contant">在线咨询
+      <image hidden="{{isShow}}" src="./images/contant.png" class="contant-img" />
+    </view>
+</view>

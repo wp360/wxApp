@@ -1,0 +1,4 @@
+<!--components/footer/index.wxml-->
+<view class="foot-line">
+  <image src="//img1.feiheimg.com/img/m/2.0.4/index/foot-line.jpg" />
+</view>

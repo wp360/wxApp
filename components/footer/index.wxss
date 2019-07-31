@@ -1,0 +1,10 @@
+/* components/footer/index.wxss */
+.foot-line {
+  width: 100%;
+  height: 115rpx;
+}
+
+.foot-line img {
+  display: block;
+  width: 100%;
+}

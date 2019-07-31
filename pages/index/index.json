@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-topnav": "/components/topnav/index",
+    "v-footer": "/components/footer/index"
+  }
+}

@@ -1,0 +1,117 @@
+<!--pages/detail/index.wxml-->
+<view class="header">
+  <view class="NewFL">
+    <view bind:tap="toBack" class="NewFL-L">
+      <image src="http://i1.feiheimg.com/img/m/item/NbackL-2.png" />
+    </view>
+    <!-- bind:tap="quickBuy" -->
+    <view bindtap='quickBuy' class="NewFL-R">
+      <image src="http://i2.feiheimg.com/img/m/item/NShop.png" />
+      <icon id="divcartno" hidden="{{!cartno}}" attr-tag="GetCartNo">
+        <text id="cartno">{{cartno}}</text>
+      </icon>
+    </view>
+  </view>
+</view>
+<view class="swiper-container">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <view class="dots">
+      <block wx:for="{{goods.imgUrls}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </view>
+  </swiper>
+</view>
+<!-- 基本属性 -->
+<view class="detail">
+  <view class="detail-warp">
+    <view class="title">{{goods.title}}
+      <icon>{{goods.info}}</icon>
+    </view>
+    <view class="price">
+      <text>¥ {{goods.price}}.00</text>
+    </view>
+  </view>
+  <!-- <switch wx:for="{{objectArray}}" wx:key="unique" style="display: block;">
+    {{item.id}}
+  </switch>
+  <button bindtap="switch">Switch</button>
+  <button bindtap="addToFront">Add to the front</button>
+
+  <switch wx:for="{{numberArray}}" wx:key="*this" style="display: block;">
+    {{item}}
+  </switch>
+  <button bindtap="addNumberToFront">Add to the front</button> -->
+
+  <view class="price2">
+    <view class="price-info">
+      <text class="txt">赠</text> 购买即赠308积分
+      <text class="point-rule" bindtap="showRule">积分规则 > </text>
+    </view>
+    <view style="width:100%;height:20rpx"></view>
+    <view class="price-info">
+      <text class="txt txt2">包邮</text> 普通会员全场包邮,单独积分兑换不包邮
+      <navigator url="/CusGrade/Readme" class="point-rule2">会员等级 > </navigator>
+    </view>
+  </view>
+
+  <view class="price-line"></view>
+  <view class="tips-line"></view>
+  <!-- 数量加减 -->
+  <view class="num">
+      <view class="title">数量：</view>
+      <view class="num-btn">
+          <view class="btn-reduce" bindtap="decreaseNum"> - </view>
+          <input value="{{number}}" class="buy-num" disabled="true" type="number" />
+          <view class="btn-add" bindtap="increaseNum"> + </view>
+      </view>
+  </view>
+  <!-- 更多可选 -->
+  <view class="tipsL-line">更多可选</view>
+  <view class="clearfix">
+    <view class="tipsShow" wx:for="{{tipsList}}" wx:key="*this">
+      <navigator url="{{item.url}}" title="">
+        <image src="{{item.image}}" alt="{{item.text}}" />
+        <text>{{item.text}}</text>
+      </navigator>
+    </view>
+  </view>
+  <!-- 为您推荐 -->
+  <view class="ggtxt">
+      <text>为您推荐</text>
+      <navigator url="/detail">
+        <image src="http://p0.feiheimg.com/day_180205/201802051059266216.jpg" alt="" />
+      </navigator>
+  </view>
+  <view class="forWhite"></view>
+</view>
+<!-- 评价 -->
+<v-comment />
+
+<!-- 加入购物车 -->
+<view class="addToCart">
+    <view>
+        <!-- <view class="J_AddToCart" bindtap='addToCart'>
+          <text>加入购物车</text>
+        </view> -->
+        <button data-goodid="{{uid}}" class="J_AddToCart button-addCar" bindtap="addToCart" formType="submit">
+          加入购物车
+        </button>
+        <view class="J_AddToCart" bindtap='quickBuy'>
+          <text>快速购买</text>
+        </view>
+    </view>
+</view>
+<!--  规则提示  -->
+<view class="ruleZhezhao {{isRuleTrue?'isRuleShow':'isRuleHide'}}">
+  <view class='ruleZhezhaoContent'>
+    <view class='ruleZhezhaoText' wx:for='{{rule}}' wx:for-index='index' wx:key="*this">
+      <text>{{index+1}}</text>
+      <text>{{item}}</text>
+    </view>
+    <text class='ruleHide' bindtap='hideRule'>X</text>
+  </view>
+</view>
+<!--  end  -->

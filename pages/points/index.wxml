@@ -1,0 +1,38 @@
+<!-- pages/points/index.wxml -->
+<view class="header">积分商城</view>
+<view class="swiper-container">
+  <swiper
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+  >
+    <view class="dots">
+      <block wx:for="{{pointsImgUrls}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </view>
+  </swiper>
+</view>
+
+<view class="point">
+  <view class="pointslist" wx:for="{{pointsList}}" wx:key="*this">
+    <view class="point-title">
+      {{item.title}}
+    </view>
+    <view class="points">
+      <view class="point_list" wx:for="{{item.data}}" wx:key="*this">
+        <navigator url="{{item.url}}">
+          <view class="pro-name">{{item.text}}</view>
+          <image src="{{item.image}}" />
+          <view class="point-detail">
+            <view class="pro-point">{{item.point}}<i>积分</i></view>
+            <view class="pro-price"><i>市场价：</i><text>￥{{item.price}}</text></view>          
+          </view>
+        </navigator>
+      </view>      
+    </view>
+  </view>
+</view>

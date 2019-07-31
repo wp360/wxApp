@@ -1,0 +1,37 @@
+<!--pages/shop-cart/index.wxml-->
+<view class="main cartbody">
+    <view class="note">
+        温馨提示:请检查奶粉段数,确认无误后再购买哦~
+    </view>
+    <view id="itemlist" class="shoppingcart">
+        <view class="noCart" wx:if="{{cartGoods.length <= 0}}">
+            <i class="no-product"></i>
+            <text>购物车空空如也，快去加满购物车吧~</text>
+            <navigator url="/pages/index/index" class="goShop">去逛逛</navigator>
+        </view>
+        <view class="cartView" wx:if="{{cartGoods.length > 0}}">
+            <view class="list">
+                <view id="item10548_20000348" class="cartitem">
+                    <view class="shopImg" bindtap="" style="cursor: pointer">
+                        <image align="absmiddle" src="" data-original="" style="display: block;" />
+                    </view>
+                    <view class="shopPro">
+                        <view class="ProName">
+                            <navigation url="/p-10548.html">星飞帆 1段 700g</navigation>
+                        </view>
+                        <view class="ProPrice">
+                            <text class="shop_monery_style">￥</text>
+                            368.00
+                        </view>
+                        <view class="num-btn">
+                            <view class="btn-reduce" bindtap="decreaseNum"> - </view>
+                            <input value="{{number}}" class="buy-num" disabled="true" type="number" />
+                            <view class="btn-add" bindtap="increaseNum"> + </view>
+                        </view>
+                    </view>
+                    <text class="shopDel J_del" bindtap=""></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,27 @@
+<!--pages/news/index.wxml-->
+<view class="mainViewClass">
+
+  <!--加载动画-->
+  <loading hidden="{{loading}}">
+    加载中...
+  </loading>
+
+  <!--顶部 分类栏目-->
+  <view class="topTabBarClass">
+
+    <!--类型 滚动视图-->
+    <scroll-view scroll-x="true" style="width: 90%;height: 100%; white-space: nowrap;display: flex">
+      <block wx:for="{{tArray}}" wx:key="*this">
+        <view animation="{{animation}}" class="topTypeListClass {{index==curpage?'curPage':''}}" bindtap="typeClick" id="{{index}}" data-idx="{{item.category}}">
+          {{item.name}}
+        </view>
+      </block>
+    </scroll-view>
+
+    <!--右边按钮-->
+    <view class="rightview">
+      <image mode="aspectFit" src="./images/addChannel.png" class="addImage"></image>
+    </view>
+  </view>
+</view>
+

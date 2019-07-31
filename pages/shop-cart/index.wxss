@@ -1,0 +1,61 @@
+/* pages/shop-cart/index.wxss */
+.cartbody {
+    overflow: auto;
+    background-color: #fff;
+    padding-bottom: 120rpx;
+}
+
+.note {
+    text-align: center;
+    color: #e51919;
+    background-color: #f9f5d9;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 28rpx;
+}
+
+#itemlist {
+    color: #898989;
+}
+
+.shoppingcart {
+    padding: 0 .15rem;
+}
+
+.noCart {
+    padding-top: 340rpx;
+}
+
+.noCart .no-product {
+    display: block;
+    width: 230rpx;
+    height: 230rpx;
+    margin: 0 auto;
+    border-radius: 115rpx;
+    background: url(http://img2.feiheimg.com/img/m/2.0.4/cart/empty.png) no-repeat center center;
+    background-size: 140rpx auto;
+    background-color: #ededed;
+    margin-bottom: 40rpx;
+}
+
+.noCart text {
+    display: block;
+    text-align: center;
+    font-size: 32rpx;
+    color: #999;
+    line-height: 1.2;
+    margin-bottom: 80rpx;
+}
+
+.noCart navigator.goShop {
+    display: block;
+    margin: 0 auto;
+    background: #276fd6;
+    color: #f6f6f6;
+    font-size: 30rpx;
+    width: 300rpx;
+    line-height: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    border-radius: 40rpx;
+}

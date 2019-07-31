@@ -1,0 +1,115 @@
+<!--index.wxml-->
+<v-topnav />
+<view class="container">
+  <swiper
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+  >
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="selling">
+    <view>
+      <navigator url="#">28天新鲜达</navigator>
+    </view>
+    <view>
+      <navigator url="#">47°全产业链</navigator>
+    </view>
+    <view>
+      <navigator url="#">品质金奖四连冠</navigator>
+    </view>
+  </view>
+  <view class="news">
+    <text class="news-title">优惠福利</text>
+    <view class="news-list">
+      <view>
+        <navigator url="http://m.feihe.com/topic/default?id=205">
+          <image src="//img1.feiheimg.com/img/m/2.0.4/index/newcustom.jpg" />
+        </navigator>
+      </view>
+      <view>
+        <navigator url="http://m.feihe.com/topic/default?id=97&amp;fh_rid=3">
+          <image src="//img1.feiheimg.com/img/m/2.0.4/index/new-topic.jpg" />
+        </navigator>
+      </view>
+      <view>
+        <navigator url="http://m.feihe.com/Item/pointList?pagesize=40">
+          <image src="//img1.feiheimg.com/img/m/2.0.4/index/point.jpg" />
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="pro-types">
+    <text class="types-title">更适合中国宝宝体质的奶粉</text>
+    <view class="types-img">
+      <navigator url="http://m.feihe.com/Item/pointList?pagesize=40">
+        <image src="//img1.feiheimg.com/img/m/2.0.4/index/point-act.jpg" />
+      </navigator>
+    </view>
+    <view class="type-list swiper-wrapper scroll_box">
+      <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+        <view class="item_list" wx:for="{{typeslist}}" wx:key="*this">
+          <navigator url="{{item.url}}">
+            <image src="{{item.image}}" class="list-img" mode="aspectFill"></image>
+            <text class="list-name">{{item.text}}</text>
+          </navigator>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="pro-list">
+    <view class="content">
+      <view class="list-tab">
+        <view class="{{currentTab==0?'select':'default'}} pro-all" data-current="0" bindtap="switchNav">全部商品</view>
+        <view class="{{currentTab==0?'select':'default'}} tab-icon">
+          <image src="//img1.feiheimg.com/img/m/2.0.4/index/tab-icon.jpg" />
+        </view>
+        <view class="{{currentTab==1?'select':'default'}} pro-age" data-current="1" bindtap="switchNav">按月龄</view>
+      </view>
+      <view class="product-detail-box">
+        <view hidden="{{ currentTab !=0 }}">
+          <view class="item_list" wx:for="{{productsAllList}}" wx:key="*this">
+            <view class="product-title">
+              {{item.title}}
+            </view>
+            <view class="type-list swiper-wrapper scroll_box">
+              <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+                <view class="product_list" wx:for="{{item.data}}" wx:key="item.id">
+                  <navigator url="/pages/detail/index?bid={{item.id}}">
+                      <image src="{{item.image}}" />
+                      <view class="pro-price">￥{{item.price}}</view>
+                      <view class="pro-name">{{item.text}}</view>
+                  </navigator>
+                </view>
+              </scroll-view>
+            </view>
+          </view>       
+        </view>
+        <view hidden="{{ currentTab !=1 }}">
+          <view class="item_list" wx:for="{{productsYearList}}" wx:key="*this">
+            <view class="product-title">
+              {{item.title}}
+            </view>
+            <view class="type-list swiper-wrapper scroll_box">
+              <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+                <view class="product_list" wx:for="{{item.data}}" wx:key="item.id">
+                  <navigator url="/pages/detail/index?bid={{item.id}}">
+                      <image src="{{item.image}}" />
+                      <view class="pro-price">￥{{item.price}}</view>
+                      <view class="pro-name">{{item.text}}</view>
+                  </navigator>
+                </view>
+              </scroll-view>
+            </view>
+          </view>  
+        </view>
+      </view>
+    </view>
+  </view>
+  <v-footer />
+</view>

@@ -1,0 +1,25 @@
+<!--components/comment/index.wxml-->
+<view class="commentLists">
+    <view id="commentsCount">
+        <view class="commentss">
+            <text>宝贝评价(7476)</text>
+            <text class="findMore">查看更多 > </text>
+        </view>
+    </view>
+    <view id="newComments">
+        <view id="twoDetail" class="de">
+            <view class="comments masonry" id="container2" style="position:relative;">
+                <view class="item">
+                    <view class="user">
+                        <text class="userName">138***2105</text>
+                        <text class="createTime">2019-05-12</text>
+                    </view>
+                    <view class="comment">
+                        发货快，质量好
+                    </view>
+                    <view class="bgstar bgstar5"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

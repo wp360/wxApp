@@ -1,0 +1,53 @@
+<!--pages/classify/index.wxml-->
+<view class="header">
+  全部商品
+</view>
+<view class="banner">
+  <navigation url="#">
+    <image src="http://img2.feiheimg.com/img/m/3.0.7/newcustom/cusedit.png" />
+  </navigation>
+</view>
+<!--主盒子-->
+<view class="container" style="height:{{windowHeight}}px;">
+  <view style="position:relative;height:{{windowHeight -46}}px;overflow:hidden">
+    <!--左侧栏-->
+    <scroll-view class="nav_left" scroll-y="true" style="height:{{windowHeight -46}}px;">
+      <view class="classify-list" style="height:auto;">
+        <block wx:for="{{classifyData}}" wx:key="item.id">
+          <view class="{{index==idx ? 'active' : 'item'}}" data-list="{{item.id}}" data-index="{{index}}" bindtap='goIndex'>
+            <view><icon></icon>{{item.title}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+    <!--右侧栏-->
+    <scroll-view class="nav_right" scroll-y="true" style="height:{{windowHeight -46}}px;" bindscrolltolower="loadmore">
+      <view class="classify-item" wx:for="{{classifyData}}" wx:if="{{sid == item.id}}" wx:key="item.id">
+        <view class="title">{{item.title}}</view>
+        <view class="item-cont" wx:for="{{item.data}}" wx:for-item="list" wx:key="list.skuid">
+          <view data-skuid="{{list.skuid}}">
+              <navigator url="/pages/detail/index?bid={{list.skuid}}">
+                  <view class="pro-img">
+                    <image src="//img1.feiheimg.com/img/2.0.2/index/body_day.png" class="image-border" />
+                    <image src="{{list.img}}" style="margin-top:40rpx;" />
+                  </view>
+                  <view class="pro-item">
+                      <view class="pro-name">{{list.name}}</view>
+                      <block wx:if="{{list.price}}">
+                        <view class="pro-price">￥<text>{{list.price}}</text></view>
+                        <view class="classify-point">赠{{list.point}}积分</view>
+                      </block>
+                      <block wx:else>
+                        <view class="pro-price"></view>
+                        <view class="pro-price point-exchange">{{list.point}}积分</view>
+                        <text class="pro-deta">不参与满赠活动</text>
+                      </block>
+                      <view class="pro-deta">生产日期:<text>{{list.deta}}</text></view>
+                  </view>
+              </navigator>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

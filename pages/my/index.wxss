@@ -1,0 +1,239 @@
+/* pages/my/index.wxss */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bg {
+  width: 750rpx;
+  height: 574rpx;
+}
+
+.avatar-position {
+  position: absolute;
+  top: 255rpx;
+}
+
+.my-img {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.about-container {
+  padding: 0 100rpx;
+  width: 550rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 440rpx;
+}
+
+.about-us image {
+  width: 34rpx;
+  height: 34rpx;
+}
+
+.preview-container {
+  margin-top: 30rpx;
+  width: 690rpx;
+  display: flex;
+  flex-direction: row;
+  padding: 0 30rpx;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.preview {
+  margin-bottom: 30rpx;
+}
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.book-num {
+  font-size: 36rpx;
+  color: #000;
+}
+
+.description {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.about-container>view:nth-child(2) {
+  margin-top: -5rpx;
+}
+
+.headline {
+  margin-top: 30rpx;
+  width: 97rpx;
+  height: 42rpx;
+}
+
+/*按钮所在容器的属性设置*/
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*按钮默认状态下属性*/
+
+.flex-view-item {
+  width: 20%;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: #ffa589;
+  text-align: center;
+}
+
+/*按钮选中状态下属性*/
+
+.flex-view-item1 {
+  width: 20%;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: #ff5400;
+  text-align: center;
+}
+
+.controls {
+  position: relative;
+  top: 50%;
+  height: 50px;
+  margin-top: -25px;
+  display: flex;
+}
+
+.play, .pause, .time {
+  flex: 1;
+  height: 100%;
+}
+
+.time {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  line-height: 50px;
+}
+
+.img {
+  width: 40px;
+  height: 40px;
+  margin: 5px auto;
+}
+
+/* 订单 */
+
+.order {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 90rpx;
+}
+
+.myorder-text {
+  font-size: 34rpx;
+  color: gray;
+  margin: 20rpx;
+  width: 40%;
+}
+
+.myorderlook-text {
+  font-size: 32rpx;
+  color: gray;
+  position: relative;
+  right: 20rpx;
+  width: 60%;
+  text-align: right;
+}
+
+.next-image {
+  width: 20rpx;
+  height: 25rpx;
+  position: relative;
+  right: 10rpx;
+}
+
+.navs {
+  display: flex;
+  width: 100%;
+}
+
+.nav-item {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20rpx;
+}
+
+.nav-item .nav-image {
+  width: 55rpx;
+  height: 55rpx;
+  margin: 5rpx;
+}
+
+.nav-item text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: gray;
+}
+
+/* 列表 */
+
+.person-list {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100rpx;
+}
+
+.item-image {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 20rpx;
+}
+
+.item-text {
+  color: gray;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+
+.person-line {
+  width: 80%;
+  height: 2rpx;
+  background: lightgray;
+  margin-left: 90rpx;
+}

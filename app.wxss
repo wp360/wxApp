@@ -1,0 +1,17 @@
+/**app.wxss**/
+/* page {
+  background-color: #eee;
+} */
+
+image {
+  width: 100%;
+  height: 100%;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
