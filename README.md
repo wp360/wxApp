@@ -344,3 +344,155 @@ Page({
   </view>
 </view>
 ```
+2. 样式添加
+```wxss
+/*=================新品特卖 样式====================*/
+.category-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20rpx;
+    margin-bottom: 0rpx;
+    padding: 0px 10px;
+
+}
+
+.category-title .title {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.category-title .line_name {
+    font-size: 10px;
+    color: #98989f;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 分割线 */
+.separate {
+    height: 15rpx;
+    background-color: #f2f2f2;
+}
+
+.category-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25rpx;
+    margin-bottom: 0rpx;
+}
+
+.category-title .name {
+    font-size: 40rpx;
+    text-align: center;
+    margin: 10rpx auto;
+}
+
+.line_flag {
+    width: 80rpx;
+    height: 1rpx;
+    display: inline-block;
+    margin: 20rpx auto;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+.line {
+    width: 100%;
+    height: 2rpx;
+    display: inline-block;
+    margin: 20rpx 0rpx;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+.head-img {
+    width: 100%;
+}
+
+.brand-name {
+    font-weight: 600;
+    font-size: 32rpx;
+}
+
+.activity-logo {
+    width: 35rpx;
+    height: 35rpx;
+    margin-right: 10rpx;
+    /* position: absolute; */
+}
+
+.pms {
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    color: #5771a8;
+}
+```
+3. 数据获取
+```js
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    brands: null, //新品特卖数据
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    // 加载新品特卖
+    that.brandShow();
+  },
+  // ajax获取新品特卖数据
+  brandShow: function (success) {
+    var that = this;
+    ajax.request({
+      method: 'GET',
+      url: 'activity/brands?key=' + utils.key + '&type=temai&page=1&size=5',
+      success: data => {
+        that.setData({
+          brands: data.result.list
+        })
+        console.log("brands：" + data.result.list)
+      }
+    })
+  }
+})
+```
+
+## 电商首页福利专场无限下拉刷新动态API数据实现
+1. 福利专场商品列表布局
+```wxml
+<!-- 福利专场 start -->
+<view class="welfare-container">
+  <view class="category-title">
+    <text class="title">福利专场</text>
+    <view class="line_name">
+      <text>每天早10晚8准时上新</text>
+    </view>
+  </view>
+  <scroll-view scroll-y="true">
+    <view class="welfares">
+      <block wx:for-items="{{newGoods}}" wx:key="id">
+        <view class="welfares-good" catchtap="catchTapCategory" data-name="{{item.name}}" data-goodsid="{{item.id}}">
+          <view>
+            <image src="{{item.imgUrl}}" class="welfares-image" mode="widthFix" />
+          </view>
+          <view class="product-name">{{item.name}}</view>
+          <view class="product-price-wrap">
+            <p class="product-price-new">￥{{item.price}}</p>
+            <p class="product-price-old">￥{{item.privilegePrice}}</p>
+            <p class="discount">{{item.discount}}折</p>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+<!-- 福利专场 end -->
+```
