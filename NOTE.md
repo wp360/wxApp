@@ -8,7 +8,7 @@ git status
 
 git add .
 
-git commit -m "云开发数据库操作"
+git commit -m "小程序云开发数据库操作"
 
 git push
 
