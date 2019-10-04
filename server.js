@@ -15,7 +15,7 @@ app.use(static(__dirname + '/'))
 const wechat = require('co-wechat')
 router.all('/wechat', wechat(conf).middleware(
   async message => {
-    console.log('wechat: ', message)
+    // console.log('wechat: ', message)
     return 'Hello World ' + message.Content
   }
 ))
@@ -40,11 +40,19 @@ router.get('/getTokens', async ctx => {
 })
 
 // https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID
-router.get('/getFollowers', async ctx => {
-  const url = `https://api.weixin.qq.com/cgi-bin/user/get?access_token=${tokenCache.access_token}`
-  const res = await axios.get(url)
-  console.log('getFollowers: ', res)
-  ctx.body = res.data
+// router.get('/getFollowers', async ctx => {
+//   const url = `https://api.weixin.qq.com/cgi-bin/user/get?access_token=${tokenCache.access_token}`
+//   const res = await axios.get(url)
+//   console.log('getFollowers: ', res)
+//   ctx.body = res.data
+// })
+
+// 使用第三方封装的微信api获取
+const WechatAPI = require('co-wechat-api')
+const api = new WechatAPI(conf.appid, conf.appsecret)
+router.get('/getFollowers', async ctx=> {
+  const res = await api.getFollowers()
+  ctx.body = res
 })
 
 app.use(router.routes())

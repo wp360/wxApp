@@ -55,14 +55,14 @@
         $(function () {
           $('#getToken').click(function () {
             $.get("getTokens", function(data){
-              // console.log("res", res);
+              // console.log("res", data);
               alert("token数据： " + data.access_token);
             });
           });
 
           $('#getFollowers').click(function () {
             $.get("getFollowers", function(data){
-              console.log("res", res);
+              console.log("res", data);
             });
           });
         });

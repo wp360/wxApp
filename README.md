@@ -8,3 +8,19 @@
 
 ## Ngrok的Windows使用教程
 [http://www.ngrok.cc/_book/start/ngrok_windows.html](http://www.ngrok.cc/_book/start/ngrok_windows.html)
+
+## co-wechat-api快速搭建微信公众号对接服务
+1. 安装
+`npm i co-wechat-api`
+[github —— https://github.com/node-webot/co-wechat-api](https://github.com/node-webot/co-wechat-api)
+2. 使用
+```js
+// server.js
+// 注释直接获取，采用api接口获取
+const WechatAPI = require('co-wechat-api')
+const api = new WechatAPI(conf.appid, conf.appsecret)
+router.get('/getFollowers', async ctx=> {
+  const res = await api.getFollowers()
+  ctx.body = res
+})
+```
