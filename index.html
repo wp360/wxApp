@@ -46,14 +46,23 @@
           </li>
         </ul>
         <h2>获取token值</h2>
-        <button id="getToken" class="btn btn-primary">获取</button>
+        <button id="getToken" class="btn btn-primary">获取token值</button>
+        <h2>获取用户列表</h2>
+        <button id="getFollowers" class="btn btn-primary">获取人数</button>
       </div>
       <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
       <script>
         $(function () {
           $('#getToken').click(function () {
             $.get("getTokens", function(data){
+              // console.log("res", res);
               alert("token数据： " + data.access_token);
+            });
+          });
+
+          $('#getFollowers').click(function () {
+            $.get("getFollowers", function(data){
+              console.log("res", res);
             });
           });
         });
