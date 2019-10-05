@@ -47,7 +47,7 @@ router.get('/getTokens', async ctx => {
 //   ctx.body = res.data
 // })
 
-const { ServerToken } = require('./mongoose')
+const { ServerToken, ClientToken } = require('./mongoose')
 
 // 使用第三方封装的微信api获取
 const WechatAPI = require('co-wechat-api')
@@ -69,7 +69,14 @@ router.get('/getFollowers', async ctx=> {
 
 // 微信授权认证
 const OAuth = require('co-wechat-oauth')
-const oauth = new OAuth(conf.appid, conf.appsecret)
+const oauth = new OAuth(conf.appid, conf.appsecret,
+  async function(openid) {
+    return await ClientToken.getToken(openid)
+  },
+  async function (openid, token) {
+    return await ClientToken.setToken(openid, token)
+  }
+)
 
 router.get('/wxAuthorize', async ctx => {
   const state = ctx.query.id
