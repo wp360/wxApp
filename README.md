@@ -9,6 +9,8 @@
 ## Ngrok的Windows使用教程
 [http://www.ngrok.cc/_book/start/ngrok_windows.html](http://www.ngrok.cc/_book/start/ngrok_windows.html)
 
+> sunny.exe clientid 4e65a0607f9651df
+
 ## co-wechat-api快速搭建微信公众号对接服务
 1. 安装
 `npm i co-wechat-api`
@@ -24,3 +26,9 @@ router.get('/getFollowers', async ctx=> {
   ctx.body = res
 })
 ```
+3. 获取用户信息列表 user_info_list
+```js
+  let res = await api.getFollowers()
+  res = await api.batchGetUsers(res.data.openid, 'zh_CN')
+```
+## 多线程的全局票据
