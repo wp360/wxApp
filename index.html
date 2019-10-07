@@ -53,29 +53,32 @@
         <button id="auth" class="btn btn-primary">微信登录</button>
         <h2>获取用户信息</h2>
         <button id="getUser" class="btn btn-primary">获取用户信息</button>
+        <h2>JS-SDK的使用</h2>
+        <button id="getJSConfig" class="btn btn-primary">获取JSConfig</button>
       </div>
       <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
       <script src="https://cdn.bootcss.com/qs/6.6.0/qs.js"></script>
+      <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
       <script>
         $(function () {
-          $('#getToken').click(function () {
+          $("#getToken").click(function () {
             $.get("getTokens", function(data){
               // console.log("res", data);
               alert("token数据： " + data.access_token);
             });
           });
 
-          $('#getFollowers').click(function () {
+          $("#getFollowers").click(function () {
             $.get("getFollowers", function(data){
               console.log("res", data);
             });
           });
 
-          $('#auth').click(function () {
+          $("#auth").click(function () {
             window.location.href = "/wxAuthorize"
           });
 
-          $('#getUser').click(function () {
+          $("#getUser").click(function () {
             // console.log("点击按钮");
             const qs = Qs.parse(window.location.search.substr(1))
             const openid = qs.openid
@@ -83,6 +86,32 @@
               console.log('getUser', data);
             })
           });
+
+          $("#getJSConfig").click(function() {
+            console.log("微信JS接口：", wx);
+            $.get("getJSConfig",{url: window.location.href}, function(data){
+              console.log("config：", data);
+              data.jsApiList = ["onMenuShareTimeline"]
+              wx.config(data)
+              wx.ready(function(res) {
+                console.log("wx.ready...")
+                // 获取网络状态
+                wx.getNetworkType({
+                  success: (result) => {
+                    const networkType = result.networkType
+                    console.log("getNetworkType...", networkType)
+                  },
+                  fail: (err) => {
+                    console.log("错误信息", err)
+                  },
+                  complete: () => {
+                    console.log("OK")
+                  }
+                })
+              })
+            })
+          });
+
         });
       </script>
     </body>

@@ -110,6 +110,12 @@ router.get('/getUser', async ctx => {
   ctx.body = userInfo
 })
 
+// 微信JS-SDK使用
+router.get('/getJSConfig', async ctx => {
+  const res = await api.getJsConfig(ctx.query)
+  ctx.body = res
+})
+
 app.use(router.routes())
 app.use(router.allowedMethods())
 app.listen(80)
