@@ -1,0 +1,8 @@
+<!--components/playlist.wxml-->
+<view class="playlist-container" bind:tap="goToMusiclist">
+  <!-- 图片 -->
+  <image src="{{playlist.picUrl}}" class="playlist-img"></image>
+  <!-- 播放数量 playlist.playCount -->
+  <text class="playlist-playcount">{{_count}}</text>
+  <view class="playlist-name">{{playlist.name}}</view>
+</view>

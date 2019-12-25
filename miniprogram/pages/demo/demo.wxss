@@ -1,0 +1,4 @@
+/* miniprogram/pages/demo.wxss */
+page {
+  background: white;
+}
