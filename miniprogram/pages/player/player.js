@@ -1,4 +1,7 @@
 // pages/player/player.js
+let musiclist = []
+// 正在播放歌曲的index
+let nowPlayingIndex = 0
 Page({
 
   /**
@@ -13,6 +16,24 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    nowPlayingIndex = options.index
+    musiclist = wx.getStorageSync('musiclist')
+    this._loadMusicDetail()
+  },
+
+  /**
+   * 加载音乐数据
+   */
+  _loadMusicDetail() {
+    let music = musiclist[nowPlayingIndex]
+    console.log(music)
+    wx.setNavigationBarTitle({
+      title: music.name,
+    })
+
+    this.setData({
+      picUrl: music.al.picUrl
+    })
   },
 
   /**
