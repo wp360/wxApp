@@ -2,7 +2,8 @@
 .musiclist-container {
   display: flex;
   padding: 14rpx 20rpx;
-  align-items: center; /* 垂直居中 */
+  align-items: center;
+  /* 垂直居中 */
 }
 
 .musiclist-index {
@@ -34,6 +35,13 @@
   color: #888;
 }
 
-.playing view, .playing text {
+/* .playing view,
+.playing text {
+  color: #d43c33;
+} */
+
+.playing .musiclist-index,
+.playing .musiclist-name,
+.playing .musiclist-singer {
   color: #d43c33;
 }

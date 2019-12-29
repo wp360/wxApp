@@ -11,7 +11,8 @@ Page({
    */
   data: {
     picUrl: '',
-    isPlaying: false // false表示不播放，true表示正在播放
+    isPlaying: false, // false表示不播放，true表示正在播放
+    isLyricShow: false // 表示当前歌词是否显示
   },
 
   /**
@@ -96,6 +97,12 @@ Page({
       nowPlayingIndex = 0
     }
     this._loadMusicDetail(musiclist[nowPlayingIndex].id)
+  },
+
+  onChangeLyricShow () {
+    this.setData({
+      isLyricShow: !this.data.isLyricShow
+    })
   },
 
   /**
