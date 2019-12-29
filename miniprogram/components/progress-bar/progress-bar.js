@@ -83,6 +83,38 @@ Component({
 
       backgroundAudioManager.onTimeUpdate(() => {
         console.log('onTimeUpdate')
+        // 当前播放的时间
+        const currentTime = backgroundAudioManager.currentTime
+        // 播放的总时长
+        const duration = backgroundAudioManager.duration
+        // console.log(currentTime)
+
+        // 优化
+        const sec = currentTime.toString().split('.')[0]
+        if(sec != currentSec) {
+          console.log(currentTime)
+          const currentTimeFmt = this._dateFormat(currentTime)
+          this.setData({
+            // 播放进度
+            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
+            // 播放百分百
+            progress: currentTime / duration * 100,
+            // 当前播放时间值设置
+            ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
+          })
+          currentSec = sec
+        }
+
+        // 格式化
+        // const currentTimeFmt = this._dateFormat(currentTime)
+        // this.setData({
+        //   // 播放进度
+        //   movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
+        //   // 播放百分百
+        //   progress: currentTime / duration * 100,
+        //   // 当前播放时间值设置
+        //   ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
+        // })
       })
 
       backgroundAudioManager.onEnded(() => {
