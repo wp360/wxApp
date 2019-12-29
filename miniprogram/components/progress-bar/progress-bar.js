@@ -38,6 +38,27 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    onChange(event) {
+      // console.log(event)
+      // 拖动
+      if (event.detail.source == 'touch') {
+        this.data.progress = event.detail.x / (movableAreaWidth - movableViewWidth) * 100
+        this.data.movableDis = event.detail.x
+        isMoving = true
+        // console.log('change', isMoving)
+      }
+    },
+    onTouchEnd() {
+      const currentTimeFmt = this._dateFormat(Math.floor(backgroundAudioManager.currentTime))
+      this.setData({
+        progress: this.data.progress,
+        movableDis: this.data.movableDis,
+        ['showTime.currentTime']: currentTimeFmt.min + ':' + currentTimeFmt.sec
+      })
+      backgroundAudioManager.seek(duration * this.data.progress / 100)
+      isMoving = false
+      // console.log('end', isMoving)
+    },
     _getMovableDis() {
       const query = this.createSelectorQuery()
       query.select('.movable-area').boundingClientRect()
@@ -83,26 +104,28 @@ Component({
 
       backgroundAudioManager.onTimeUpdate(() => {
         console.log('onTimeUpdate')
-        // 当前播放的时间
-        const currentTime = backgroundAudioManager.currentTime
-        // 播放的总时长
-        const duration = backgroundAudioManager.duration
-        // console.log(currentTime)
+        if (!isMoving) {
+          // 当前播放的时间
+          const currentTime = backgroundAudioManager.currentTime
+          // 播放的总时长
+          const duration = backgroundAudioManager.duration
+          // console.log(currentTime)
 
-        // 优化
-        const sec = currentTime.toString().split('.')[0]
-        if(sec != currentSec) {
-          console.log(currentTime)
-          const currentTimeFmt = this._dateFormat(currentTime)
-          this.setData({
-            // 播放进度
-            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
-            // 播放百分百
-            progress: currentTime / duration * 100,
-            // 当前播放时间值设置
-            ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
-          })
-          currentSec = sec
+          // 优化
+          const sec = currentTime.toString().split('.')[0]
+          if (sec != currentSec) {
+            console.log(currentTime)
+            const currentTimeFmt = this._dateFormat(currentTime)
+            this.setData({
+              // 播放进度
+              movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
+              // 播放百分百
+              progress: currentTime / duration * 100,
+              // 当前播放时间值设置
+              ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
+            })
+            currentSec = sec
+          }
         }
 
         // 格式化
