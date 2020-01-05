@@ -114,7 +114,7 @@ Component({
           // 优化
           const sec = currentTime.toString().split('.')[0]
           if (sec != currentSec) {
-            console.log(currentTime)
+            // console.log(currentTime)
             const currentTimeFmt = this._dateFormat(currentTime)
             this.setData({
               // 播放进度
@@ -125,6 +125,10 @@ Component({
               ['showTime.currentTime']: `${currentTimeFmt.min}:${currentTimeFmt.sec}`,
             })
             currentSec = sec
+            // 联动歌词
+            this.triggerEvent('timeUpdate', {
+              currentTime
+            })
           }
         }
 
