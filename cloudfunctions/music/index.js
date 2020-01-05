@@ -35,6 +35,13 @@ exports.main = async (event, context) => {
       })
   })
 
+  app.router('lyric', async (ctx, next) => {
+    ctx.body = await rp(BASE_URL + `/lyric?id=${event.musicId}`)
+      .then((res) => {
+        return res
+      })
+  })
+
   return app.serve()
   // return await cloud.database().collection('playlist')
   // .skip(event.start)

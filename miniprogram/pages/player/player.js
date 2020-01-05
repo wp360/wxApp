@@ -12,7 +12,8 @@ Page({
   data: {
     picUrl: '',
     isPlaying: false, // false表示不播放，true表示正在播放
-    isLyricShow: false // 表示当前歌词是否显示
+    isLyricShow: false, // 表示当前歌词是否显示
+    lyric: ''
   },
 
   /**
@@ -66,6 +67,25 @@ Page({
         isPlaying: true
       })
       wx.hideLoading()
+
+      // 加载歌词
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          musicId,
+          $url: 'lyric'
+        }
+      }).then((res) => {
+        console.log(res)
+        let lyric = '暂无歌词'
+        const lrc = JSON.parse(res.result).lrc
+        if(lrc) {
+          lyric = lrc.lyric
+        }
+        this.setData({
+          lyric
+        })
+      })
     })
   },
 

@@ -7,6 +7,13 @@ Component({
     isLyricShow: {
       type: Boolean,
       value: false
+    },
+    lyric: String
+  },
+
+  observers: {
+    lyric(lrc) {
+      console.log(lrc)
     }
   },
 
