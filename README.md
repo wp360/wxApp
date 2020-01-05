@@ -67,6 +67,42 @@
 - 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
 - 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
 
+## 小程序全局属性设置
+1. app.js
+```js
+  this.globalData = {
+    playingMusicId: -1
+  }
+
+  setPlayMusicId(musicId) {
+    this.globalData.playingMusicId = musicId
+  },
+  getPlayMusicId() {
+    return this.globalData.playingMusicId
+  }
+2. 调用全局属性
+const app = getApp()
+
+// 设置全局属性
+app.setPlayMusicId(musicId)
+
+3. 获取全局属性
+pageLifetimes: {
+  show() {
+    app.getPlayMusicId()
+  }
+},
+
+// 赋值
+pageLifetimes: {
+  show() {
+    this.setData({
+      playingId: app.getPlayMusicId()
+    })
+  }
+},
+```
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
