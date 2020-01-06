@@ -9,4 +9,12 @@
       <x-search iconfont="iconfont" icon-sousuo="icon-sousuo" />
     </view>
   </view>
+
+  <!-- 底部弹出层 -->
+  <x-bottom-modal modalShow="{{modalShow}}">
+    <view>
+      <view>插槽</view>
+      <button>按钮</button>
+    </view>
+  </x-bottom-modal>
 </view>
