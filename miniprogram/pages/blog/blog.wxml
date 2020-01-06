@@ -12,9 +12,10 @@
 
   <!-- 底部弹出层 -->
   <x-bottom-modal modalShow="{{modalShow}}">
-    <view>
-      <view>插槽</view>
+    <view slot="slot2">
+      <view>插槽1</view>
       <button>按钮</button>
     </view>
+    <view slot="slot1">插槽2</view>
   </x-bottom-modal>
 </view>

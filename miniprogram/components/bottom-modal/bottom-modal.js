@@ -8,7 +8,8 @@ Component({
   },
   // 组件样式隔离
   options: {
-    styleIsolation: 'apply-shared'
+    styleIsolation: 'apply-shared',
+    multipleSlots: true
   },
 
   /**
