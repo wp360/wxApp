@@ -21,7 +21,10 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: (res) => {
-              console.log(res)
+              // console.log(res)
+              this.onLoginSuccess({
+                detail: res.userInfo
+              })
             }
           })
         } else {
@@ -35,6 +38,9 @@ Page({
   onLoginSuccess(event) {
     console.log(event)
     const detail = event.detail
+    wx.navigateTo({
+      url: `../blog-edit/blog-edit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
+    })
   },
   onLoginFail() {
     wx.showModal({
