@@ -11,11 +11,37 @@ Page({
 
   // 发布功能
   onPublish() {
-    this.setData({
-      modalShow: true
+    // this.setData({
+    //   modalShow: true
+    // })
+    // 判断用户是否授权
+    wx.getSetting({
+      success: (res) => {
+        console.log(res)
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: (res) => {
+              console.log(res)
+            }
+          })
+        } else {
+          this.setData({
+            modalShow: true
+          })
+        }
+      }
     })
   },
-
+  onLoginSuccess(event) {
+    console.log(event)
+    const detail = event.detail
+  },
+  onLoginFail() {
+    wx.showModal({
+      title: '授权用户才能发布',
+      content: ''
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

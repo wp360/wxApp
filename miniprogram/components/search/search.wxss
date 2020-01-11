@@ -25,7 +25,7 @@
   font-size: 24rpx;
 }
 
-button.search:not([size='mini']) {
+.search:not([size='mini']) {
   min-height: auto;
   width: auto;
 }  
