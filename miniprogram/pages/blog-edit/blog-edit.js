@@ -1,6 +1,8 @@
 // pages/blog-edit/blog-edit.js
 // 输入文字最大个数
 const MAX_WORDS_NUM = 140
+// 最大上传图片数量
+const MAX_IMG_NUM = 9
 Page({
 
   /**
@@ -9,7 +11,9 @@ Page({
   data: {
     // 输入文字的个数
     wordsNum: 0,
-    footerBottom: 0
+    footerBottom: 0,
+    images: [],
+    selectPhoto: true // 添加图片的元素是否显示
   },
 
   /**
@@ -41,6 +45,48 @@ Page({
   onBlur() {
     this.setData({
       footerBottom: 0
+    })
+  },
+
+  onChooseImage() {
+    // 还能再选几张图片
+    let max = MAX_IMG_NUM - this.data.images.length
+    wx.chooseImage({
+      count: max,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      complete: (res) => {
+        console.log(res)
+        this.setData({
+          images: this.data.images.concat(res.tempFilePaths)
+        })
+        // 还能再选几张图片
+        max = MAX_IMG_NUM - this.data.images.length
+        this.setData({
+          selectPhoto: max <=0 ? false : true
+        })
+      },
+    })
+  },
+
+  onDelImage(event) {
+    this.data.images.splice(event.target.dataset.index, 1)
+    this.setData({
+      images: this.data.images
+    })
+    // 删除图片不满9张后，显示添加
+    if(this.data.images.length == MAX_IMG_NUM - 1) {
+      this.setData({
+        selectPhoto: true
+      })
+    }
+  },
+
+  // 预览图片
+  onPreviewImage(event) {
+    wx.previewImage({
+      urls: this.data.images,
+      current: event.target.dataset.imgsrc
     })
   },
 
