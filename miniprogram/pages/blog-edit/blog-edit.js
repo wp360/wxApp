@@ -3,6 +3,12 @@
 const MAX_WORDS_NUM = 140
 // 最大上传图片数量
 const MAX_IMG_NUM = 9
+// 云数据库初始化
+const db = wx.cloud.database()
+// 输入的文字内容
+let content = ''
+// 用户信息
+let userInfo = {}
 Page({
 
   /**
@@ -21,6 +27,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    userInfo = options
   },
 
   onInput(event) {
@@ -32,6 +39,7 @@ Page({
     this.setData({
       wordsNum
     })
+    content = event.detail.value
   },
 
   onFocus(event) {
@@ -95,23 +103,65 @@ Page({
     // 数据 -> 云数据库
     // 数据库： 内容、图片fileID、openid、昵称、头像、时间
     // 图片 -> 云存储 fileID 云文件ID
+    if(content.trim() === '') {
+      wx.showModal({
+        title: '提醒',
+        content: '请输入内容'
+      })
+      return
+    }
 
+    wx.showLoading({
+      title: '发布中'
+    })
+
+    let promiseArr = []
+    let fileIds = []
     // 图片上传
     for (let i=0,len=this.data.images.length; i < len; i++) {
-      let item = this.data.images[i]
-      // 文件扩展名
-      let suffix = /\.\w+$/.exec(item)[0]
-      wx.cloud.uploadFile({
-        cloudPath: 'blog/' + Date.now() + '-' + Math.random() * 1000000 + suffix,
-        filePath: item,
-        success: (res) => {
-          console.log(res)
-        },
-        fail: (err) => {
-          console.error(err)
-        }
-      })      
+      let p = new Promise((resolve, reject) => {
+        let item = this.data.images[i]
+        // 文件扩展名
+        let suffix = /\.\w+$/.exec(item)[0]
+        wx.cloud.uploadFile({
+          cloudPath: 'blog/' + Date.now() + '-' + Math.random() * 1000000 + suffix,
+          filePath: item,
+          success: (res) => {
+            console.log(res.fileID)
+            fileIds = fileIds.concat(res.fileID)
+            resolve()
+          },
+          fail: (err) => {
+            console.error(err)
+            reject()
+          }
+        }) 
+      })
+      promiseArr.push(p)
     }
+    // 存入到云数据库
+    Promise.all(promiseArr).then((res) => {
+      db.collection('blog').add({
+        data: {
+          ...userInfo,
+          content,
+          img: fileIds,
+          createTime: db.serverDate() // 服务端的时间
+        }
+      }).then((res) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '发布成功',
+        })
+        // 返回blog页面，并且刷新
+        wx.navigateBack()
+      })
+    }).catch((err) => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '发布失败',
+      })
+    })
   },
 
   /**
