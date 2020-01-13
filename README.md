@@ -103,6 +103,98 @@ pageLifetimes: {
 },
 ```
 
+## 博客
+1. cloudfunctions 》 blog 云函数
+2. 安装tcb-router
+`npm install tcb-router --save`
+3. 引入使用
+```js
+// blog >> index.js
+// 云函数入口文件
+const cloud = require('wx-server-sdk')
+
+cloud.init()
+// 引入
+const TcbRouter = require('tcb-router')
+// 调用数据库
+const db = cloud.database()
+// 获取博客集合
+const blogCollection = db.collection('blog')
+
+// 云函数入口函数
+exports.main = async (event, context) => {
+  const app = new TcbRouter({
+    event
+  })
+
+  app.router('list', async(ctx,next) => {
+    let blogList = await blogCollection.skip(event.start).limit(event.count)
+    .orderBy('createTime', 'desc').get()
+    .then((res) => {
+      return res.data
+    })
+    ctx.body = blogList
+  })
+
+  return app.serve()
+}
+```
+4. 上传
+5. 调用云函数
+```js
+// pages >> blog >> blog.js
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    // 控制底部弹出层是否显示
+    modalShow: false,
+    blogList: []
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this._loadBlogList()
+  },
+  /**
+   * 加载博客列表
+   */
+  _loadBlogList(){
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
+        $url: 'list',
+        start: 0,
+        count: 10
+      }
+    }).then((res) => {
+      this.setData({
+        blogList: this.data.blogList.concat(res.result)
+      })
+    })
+  },
+```
+6. 博客显示组件
+* 新建文件 components 》 blog-card
+* 引入组件 blog.json
+```json
+{
+  "usingComponents": {
+    // ...
+    "x-blog-card": "/components/blog-card/blog-card"
+  },
+  "navigationBarTitleText": "发现"
+}
+```
+7. 博客卡片列表
+* blog.wxml
+* blog-card.wxml
+* blog-card.wxss
+* blog-card.js
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
