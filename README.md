@@ -195,6 +195,19 @@ exports.main = async (event, context) => {
 * blog-card.wxss
 * blog-card.js
 
+## 刷新
+* 子界面调用父界面的功能
+* 代码
+```js
+// blog-edit.js
+// 刷新部分
+const pages = getCurrentPages()
+console.log(pages)
+// 取到上一个页面
+const prevPage = pages[pages.length - 2]
+prevPage.onPullDownRefresh()
+```
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)

@@ -156,6 +156,12 @@ Page({
         })
         // 返回blog页面，并且刷新
         wx.navigateBack()
+        // 刷新部分
+        const pages = getCurrentPages()
+        console.log(pages)
+        // 取到上一个页面
+        const prevPage = pages[pages.length - 2]
+        prevPage.onPullDownRefresh()
       })
     }).catch((err) => {
       wx.hideLoading()
