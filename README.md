@@ -208,6 +208,28 @@ const prevPage = pages[pages.length - 2]
 prevPage.onPullDownRefresh()
 ```
 
+## 模糊搜索
+1. 搜索页面绑定输入事件
+2. 获取关键字
+3. triggerEvent 自定义事件
+4. 父页面使用搜索方法
+5. 云函数添加搜索方法
+```js
+// cloudfunctions/blog/index.js
+// 省略...
+  const keyword = event.keyword
+  let w = {}
+  if (keyword.trim()!== '') {
+    w = {
+      content: db.RegExp({
+        regexp: keyword,
+        options: 'i'
+      })
+    }
+  }
+```
+6. 云开发添加content索引，优化搜索速度（空间换时间）
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)

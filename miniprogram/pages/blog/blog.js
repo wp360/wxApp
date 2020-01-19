@@ -1,4 +1,6 @@
 // miniprogram/pages/blog/blog.js
+// 搜索的关键字
+let keyword = ''
 Page({
 
   /**
@@ -54,17 +56,41 @@ Page({
    */
   onLoad: function (options) {
     this._loadBlogList()
+    // 小程序端调用云数据库
+    /*  const db = wx.cloud.database()
+     db.collection('blog').orderBy('createTime', 'desc').get().then((res)=>{
+       console.log(res)
+       const data = res.data
+       for (let i = 0, len = data.length; i<len; i++){
+         data[i].createTime = data[i].createTime.toString()
+       }
+       this.setData({
+         blogList: data
+       })
+     }) */
+  },
+  /**
+   * 搜索
+   */
+  onSearch(event) {
+    console.log(event.detail.keyword)
+    this.setData({
+      blogList: []
+    })
+    keyword = event.detail.keyword
+    this._loadBlogList(0)
   },
   /**
    * 加载博客列表
    */
-  _loadBlogList(start=0){
+  _loadBlogList(start = 0) {
     wx.showLoading({
       title: '数据加载中...',
     })
     wx.cloud.callFunction({
       name: 'blog',
       data: {
+        keyword,
         start,
         count: 10,
         $url: 'list'
