@@ -301,6 +301,11 @@ externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
 9. 添加底部弹出层内容
 * blog-ctrl.wxml
 
+## 云数据库中1对N关系的三种设计方式
+1. 数组
+2. 分开两个集合
+3. N的一方存储1的ID（N数据大量的情况下）
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)

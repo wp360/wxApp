@@ -1,12 +1,14 @@
 // components/blog-ctrl/blog-ctrl.js
 // 用户信息
 let userInfo = {}
+// 数据库初始化
+const db = wx.cloud.database()
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    blogId: String
   },
   externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
   /**
@@ -47,7 +49,8 @@ Component({
         }
       })
     },
-    onLoginsuccess() {
+    onLoginsuccess(event) {
+      userInfo = event.detail
       // 授权框消失，评论框显示
       this.setData({
         loginShow: false
@@ -62,6 +65,47 @@ Component({
         title: '授权用户才能进行评价',
         content: ''
       })
+    },
+    onInput(event) {
+      this.setData({
+        content: event.detail.value
+      })
+    },
+    onSend() {
+      // 评论信息插入云数据库
+      let content = this.data.content
+      if(content.trim() == '') {
+        wx.showModal({
+          title: '评论内容不能为空',
+          content: ''
+        })
+        return
+      }
+      // 评价中
+      wx.showLoading({
+        title: '评价中...',
+        mask: true
+      })
+      db.collection('blog-comment').add({
+        data: {
+          content,
+          createTime: db.serverDate(),
+          blogId: this.properties.blogId,
+          nickName: userInfo.nickName,
+          avatarUrl: userInfo.avatarUrl
+        }
+      }).then((res) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '评论成功！'
+        })
+        // 隐藏设置清空评论内容
+        this.setData({
+          modalShow: false,
+          content: ''
+        })
+      })
+      // 推送模板消息
     }
   }
 })
