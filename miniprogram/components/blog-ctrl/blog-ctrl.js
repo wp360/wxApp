@@ -30,7 +30,7 @@ Component({
       // 判断用户是否授权
       wx.getSetting({
         success: (res) => {
-          if(res.authSetting['scope.address.userInfo']) {
+          if (res.authSetting['scope.address.userInfo']) {
             wx.getUserInfo({
               complete: (res) => {
                 userInfo = res.userInfo
@@ -71,10 +71,13 @@ Component({
         content: event.detail.value
       })
     },
-    onSend() {
+    onSend(event) {
       // 评论信息插入云数据库
+      // let formId = event.detail.formId
       let content = this.data.content
-      if(content.trim() == '') {
+      // let content = event.detail.value.content
+
+      if (content.trim() == '') {
         wx.showModal({
           title: '评论内容不能为空',
           content: ''
@@ -95,6 +98,52 @@ Component({
           avatarUrl: userInfo.avatarUrl
         }
       }).then((res) => {
+        // 推送(模板)订阅消息
+        // wx.cloud.callFunction({
+        //   name: 'sendMessage',
+        //   data: {
+        //     content,
+        //     nickName: userInfo.nickName,
+        //     formId,
+        //     blogId: this.properties.blogId,
+        //   }
+        // }).then((res) => {
+        //   console.log(res)
+        // })
+        // 调用微信 API 申请发送订阅消息
+        const blogId = this.properties.blogId
+        wx.requestSubscribeMessage({
+          // 传入订阅消息的模板id，模板 id 可在小程序管理后台申请
+          tmplIds: ['5MrespAoFrudyNT-QwIlqxT_GgzrhFkaKGztq6OFetU'],
+          success(res) {
+            console.log(res)
+            // 申请订阅成功
+            if (res.errMsg === 'requestSubscribeMessage:ok') {
+              // 这里将订阅的课程信息调用云函数存入云开发数据
+              wx.cloud.callFunction({
+                name: 'sendMessage',
+                data: {
+                  content,
+                  // formId,
+                  nickName: userInfo.nickName,
+                  blogId
+                }
+              }).then(() => {
+                wx.showToast({
+                  title: '订阅成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }).catch(() => {
+                wx.showToast({
+                  title: '订阅失败',
+                  icon: 'success',
+                  duration: 2000
+                })
+              })
+            }
+          },
+        })
         wx.hideLoading()
         wx.showToast({
           title: '评论成功！'
@@ -105,7 +154,6 @@ Component({
           content: ''
         })
       })
-      // 推送模板消息
     }
   }
 })

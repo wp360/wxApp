@@ -12,12 +12,13 @@
 <!-- 登录判断 -->
 <x-login modalShow="{{loginShow}}" bind:loginsuccess="onLoginsuccess" bind:loginfail="onLoginfail" />
 <x-bottom-modal modalShow="{{modalShow}}">
-  <!-- <form slot="modal-content" report-submit="true" bind:submit="onSend">
-    <textarea name="content" class="comment-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
-    <button class="send" form-type="submit">发送</button>
-  </form> -->
   <view slot="modal-content">
     <textarea name="content" class="comment-content" bindinput="onInput" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
     <button class="send" bind:tap="onSend">发送</button>
   </view>
+  <!-- 模板消息推送设置 -->
+  <!-- <form slot="modal-content" report-submit="true" bind:submit="onSend">
+    <textarea name="content" class="comment-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
+    <button class="send" form-type="submit" bindtap="onSend">发送</button>
+  </form> -->
 </x-bottom-modal>
