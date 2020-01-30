@@ -230,6 +230,77 @@ prevPage.onPullDownRefresh()
 ```
 6. 云开发添加content索引，优化搜索速度（空间换时间）
 
+## 评论与分享
+1. 新增组件blog-ctrl
+* components >> blog-ctrl (新建Component)
+2. 引入组件
+* pages >> blog >> blog.json
+```json
+{
+  "usingComponents": {
+    // 省略
+    "x-blog-ctrl": "/components/blog-ctrl/blog-ctrl"
+  },
+  "navigationBarTitleText": "发现",
+  "enablePullDownRefresh": true
+}
+```
+* pages >> blog >> blog.wxml 添加在博客卡片列表下
+3. 组件布局
+* components >> blog-ctrl >> blog-ctrl.wxml
+```wxml
+<view class="ctrl">
+  <view class="ctrl-item" bind:tap="onComment">
+    <i class="iconfont icon-pinglun icon"></i>
+    <text>评论</text>
+  </view>
+  <view class="ctrl-item share">
+    <i class="iconfont icon-fenxiang icon"></i>
+    <text>分享</text>
+  </view>
+</view>
+
+```
+4. 添加样式
+* components >> blog-ctrl >> blog-ctrl.wxss
+5. 图标文件
+* pages >> blog >> blog.wxml 添加属性
+```wxml
+<x-blog-ctrl iconfont="iconfont" icon-pinglun="icon-pinglun" icon-fenxiang="icon-fenxiang" />
+```
+* components >> blog-ctrl >> blog-ctrl.js
+```js
+// 使用externalClass自定义组件样式
+externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
+```
+6. 点击评论事件
+* components >> blog-ctrl >> blog-ctrl.js => onComment()
+7. 调用登录组件
+* blog-ctrl.json
+```json
+{
+  "component": true,
+  "usingComponents": {
+    "x-login": "/components/login/login"
+  }
+}
+```
+* blog-ctrl.wxml
+```wxml
+<!-- 登录判断 -->
+<x-login modalShow="{{loginShow}}" bind:loginsuccess="onLoginsuccess" bind:loginfail="onLoginfail" />
+```
+8. 显示评论弹出层
+* blog-ctrl.json
+```json
+  "usingComponents": {
+    "x-login": "/components/login/login",
+    "x-bottom-modal": "/components/bottom-modal/bottom-modal"
+  }
+```
+9. 添加底部弹出层内容
+* blog-ctrl.wxml
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
