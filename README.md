@@ -306,6 +306,9 @@ externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
 2. 分开两个集合
 3. N的一方存储1的ID（N数据大量的情况下）
 
+## 评论云函数查询数据
+[参考文档：https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html)
+
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
