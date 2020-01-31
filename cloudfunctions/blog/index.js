@@ -58,7 +58,7 @@ exports.main = async (event, context) => {
       // 承载所有读操作的 promise 的数组
       const tasks = []
       for(let i = 0; i < batchTimes; i++) {
-        let promise = blogCollection.skip(i*MAX_LIMIT).limit(MAX_LIMIT).where({
+        let promise = db.collection('blog-comment').skip(i*MAX_LIMIT).limit(MAX_LIMIT).where({
           blogId
         }).orderBy('createTime', 'desc').get()
         tasks.push(promise)
