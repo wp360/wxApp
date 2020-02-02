@@ -331,6 +331,8 @@ externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
 * openid：微信用户在某个小程序或者公众号的唯一标识，用于获取用户信息。通过应用appid+用户微信号加密，产生的openid。
 * unionid：同一个用户在不同的应用（小程序或者公众号），unionid是相同的，可以用来用户量去重。
 
+## 我的
+
 
 ## 评论云函数查询数据
 [参考文档：https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html)
