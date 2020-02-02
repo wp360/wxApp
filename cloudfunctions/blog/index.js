@@ -79,5 +79,17 @@ exports.main = async (event, context) => {
 
   })
 
+  // 根据openid获取博客列表
+  const wxContext = cloud.getWXContext() // 在云函数中获取微信调用上下文，该方法无需传入参数
+  app.router('getListByOpenid', async(ctx, next) => {
+    ctx.body = await blogCollection.where({
+      _openid: wxContext.OPENID // 小程序用户 openid
+    }).skip(event.start).limit(event.count)
+    .orderBy('createTime', 'desc').get()
+    .then((res) => {
+      return res.data
+    })
+  })
+
   return app.serve()
 }
