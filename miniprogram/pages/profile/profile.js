@@ -15,6 +15,25 @@ Page({
 
   },
 
+  // 生成小程序码
+  onTapQrCode() {
+    wx.showLoading({
+      title: '生成中...'
+    })
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'getQrcode'
+    }).then((res) => {
+      console.log(res)
+      const fileId = res.result
+      wx.previewImage({
+        urls: [fileId],
+        current: fileId
+      })
+      wx.hideLoading()
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

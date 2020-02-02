@@ -55,6 +55,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取扫码信息
+    console.log(options.scene)
+    
     this._loadBlogList()
     // 小程序端调用云数据库
     /*  const db = wx.cloud.database()
