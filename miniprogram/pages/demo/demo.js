@@ -34,7 +34,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 使用此方法需要已经授权，否则无效
+    wx.getUserInfo({
+      complete: (res) => {
+        console.log(res)
+      }
+    })
+  },
 
+  onGetUserInfo(event) {
+    console.log(event)
+  },
+
+  getOpenId() {
+    wx.cloud.callFunction({
+      name: 'login'
+    }).then((res) => {
+      console.log(res)
+    })
   },
 
   /**

@@ -1,13 +1,13 @@
 {
   "pages": [
+    "pages/demo/demo",
     "pages/playlist/playlist",
     "pages/blog/blog",
     "pages/profile/profile",
     "pages/musiclist/musiclist",
     "pages/player/player",
     "pages/blog-edit/blog-edit",
-    "pages/blog-comment/blog-comment",
-    "pages/demo/demo"
+    "pages/blog-comment/blog-comment"
   ],
   "requiredBackgroundModes": ["audio"],
   "window": {

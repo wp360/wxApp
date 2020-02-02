@@ -309,10 +309,28 @@ externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
 ## 评论详情
 1. 评论云函数查询数据
 2. 调用云函数
-```js
-// 定义调用方法
+3. 页面布局添加样式
 
-```
+## 对比不同方式获取用户信息的应用场景
+1. 传统微信登录
+* 用户端小程序 => 微信服务器 => 后端服务器
+* 调用wx.login获取code
+* 调用wx.request将code传递给后端服务器
+* 使用code换取openid和session_key
+* 将用户标示发送给小程序本地存储
+
+2. 云开发微信登录
+* 用户 => 小程序 => 云函数 => 云函数
+* 点击获取用户信息
+* 获取用户信息
+* 返回用户信息
+* 用户信息存储到云数据库
+
+3. appid等的区别
+* appid：一个appid唯一对应一个小程序或者公众号，尽管一个appid可以开发多个小程序，但是最终提交审核和上线的只能是一个小程序。
+* openid：微信用户在某个小程序或者公众号的唯一标识，用于获取用户信息。通过应用appid+用户微信号加密，产生的openid。
+* unionid：同一个用户在不同的应用（小程序或者公众号），unionid是相同的，可以用来用户量去重。
+
 
 ## 评论云函数查询数据
 [参考文档：https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html)
