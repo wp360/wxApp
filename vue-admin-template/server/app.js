@@ -7,9 +7,16 @@ const router = new Router()
 const ENV = 'wxcloud-73wod'
 // 跨域
 const cors = require('koa2-cors')
+const koaBody = require('koa-body')
+
 app.use(cors({
   origin: ['http://localhost:9528'],
   credentials: true
+}))
+
+// 接收post参数解析
+app.use(koaBody({
+  multipart: true
 }))
 
 app.use(async (ctx, next) => {

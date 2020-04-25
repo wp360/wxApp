@@ -404,3 +404,102 @@ router.get('/list', async(ctx, next) => {
 
 module.exports = router
 ```
+## 歌单编辑
+* 1. 歌单列表编辑按钮添加对应方法
+* 2. 新增edit.vue编辑页面
+* 3. 添加对应路由
+* 4. 添加通过歌单id查询数据的方法（api >> playlist.js）
+* 5. 添加通过歌单id获取信息（controller >> playlist.js）
+```js
+const callCloudDB = require('../utils/callCloudDB')
+
+// 通过歌单id获取信息
+router.get('/getById', async(ctx, next) => {
+  const query = `db.collection('playlist').doc('${ctx.request.query.id}').get()`
+  const res = await callCloudDB(ctx, 'databasequery', query)
+  ctx.body = {
+    data: JSON.parse(res.data),
+    code: 20000
+  }
+})
+
+```
+* 6. 调用云数据库（封装）方法
+```js
+// vue-admin-template/server/utils/callCloudDB.js
+const getAccessToken = require('./getAccessToken')
+const rp = require('request-promise')
+
+const callCloudDB = async (ctx, fnName, query = {}) => {
+  const ACCESS_TOKEN = await getAccessToken()
+  const options = {
+    method: 'POST',
+    uri: `https://api.weixin.qq.com/tcb/${fnName}?access_token=${ACCESS_TOKEN}`,
+    body: {
+      query,
+      env: ctx.state.env
+    },
+    json: true // Automatically stringifies the body to JSON
+  }
+
+  return await rp(options)
+    .then((res) => {
+      return res
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+}
+
+module.exports = callCloudDB
+
+```
+* 7. 编辑页面
+* 8. 更新接口
+```js
+//  vue-admin-template/src/api/playlist.js
+export function update(params) {
+  return request({
+    url: `${baseURL}/playlist/updatePlaylist`,
+    data: {
+      ...params
+    },
+    method: 'post'
+  })
+}
+
+```
+* 9. koa-body的使用
+> 用于koa框架解析请求体的模块
+`npm i koa-body`
+```js
+// app.js
+const koaBody = require('koa-body')
+
+// 接收post参数解析
+app.use(koaBody({
+  multipart: true
+}))
+```
+* 10. 后端对应方法
+```js
+// vue-admin-template/server/controller/playlist.js
+// 更新
+router.post('/updatePlaylist', async(ctx, next)=>{
+  const params = ctx.request.body
+  const query = `
+    db.collection('playlist').doc('${params._id}').update({
+      data: {
+        name: '${params.name}',
+        copywriter: '${params.copywriter}'
+      }
+    })
+  `
+  const res = await callCloudDB(ctx, 'databaseupdate', query)
+  ctx.body = {
+    data: res,
+    code: 20000
+  }
+})
+```
+* 11. 调用接口
