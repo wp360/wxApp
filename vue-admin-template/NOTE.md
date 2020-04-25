@@ -503,3 +503,34 @@ router.post('/updatePlaylist', async(ctx, next)=>{
 })
 ```
 * 11. 调用接口
+## 歌单删除功能
+* 1. 添加删除按钮及方法
+* 2. 添加删除确认弹框
+* 3. 删除api接口
+```js
+//  vue-admin-template/src/api/playlist.js
+// 删除
+export function del(params) {
+  return request({
+    params,
+    url: `${baseURL}/playlist/del`,
+    method: 'get'
+  })
+}
+```
+* 4. 后端添加对应删除方法
+```js
+// vue-admin-template/server/controller/playlist.js
+// 删除
+router.get('/del', async (ctx, next) => {
+  const params = ctx.request.query
+  const query = `db.collection('playlist').doc('${params.id}').remove()`
+  const res = await callCloudDB(ctx, 'databasedelete', query)
+  ctx.body = {
+    data: res,
+    code: 20000
+  }
+})
+
+```
+* 5. 页面删除方法添加

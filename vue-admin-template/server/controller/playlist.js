@@ -54,4 +54,15 @@ router.post('/updatePlaylist', async(ctx, next)=>{
   }
 })
 
+// 删除
+router.get('/del', async (ctx, next) => {
+  const params = ctx.request.query
+  const query = `db.collection('playlist').doc('${params.id}').remove()`
+  const res = await callCloudDB(ctx, 'databasedelete', query)
+  ctx.body = {
+    data: res,
+    code: 20000
+  }
+})
+
 module.exports = router
