@@ -9,3 +9,10 @@
 <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">获取用户信息</button>
 <!-- 获取用户openID -->
 <button bind:tap="getOpenId">获取openid</button>
+<!-- 添加 -->
+<view>{{num}}</view>
+<button bind:tap="add"> + </button>
+<!-- setData -->
+<view>{{testObj.name}}</view>
+<view>{{testObj.age}}</view>
+<button bind:tap="changeAge"> 更新年龄 </button>

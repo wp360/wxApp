@@ -332,10 +332,52 @@ externalClasses: ['iconfont', 'icon-pinglun', 'icon-fenxiang'],
 * unionid：同一个用户在不同的应用（小程序或者公众号），unionid是相同的，可以用来用户量去重。
 
 ## 我的
+1. 最近播放
+2. 我的发现
+3. 小程序码
 
+## sitemap配置
+```json
+{
+  "desc": "关于本文件的更多信息，请参考文档 https://developers.weixin.qq.com/miniprogram/dev/framework/sitemap.html",
+  "rules": [{
+  "action": "allow", // 如果不想被索引的话，参数改成disallow
+  "page": "*"
+  }]
+}
+// 规则调整带参数页面
+  "rules": [{
+  "action": "allow", // 如果不想被索引的话，参数改成disallow
+  "page": "pages/player/player",
+  "params": ["musicId", "index"],
+  "matching": "exact" // 完全匹配
+  }, {
+  "action": "disallow",
+  "page": "*"
+  }]
+```
 
 ## 评论云函数查询数据
 [参考文档：https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/read.html)
+
+## 小程序性能与体验优化
+* 滚动区域可开启惯性滚动以增强体验
+* 》 ios上： -webkit-overflow-scrolling: touch 
+* 所有请求的耗时不应太久
+* 避免短时间内发起太多的图片请求
+* 避免短时间内发起太多的请求
+
+## Audits 体验评分
+* 定位和识别小程序运行过程中的体验问题，从性能、体验、最佳实践三个维度对小程序进行分析，同时提供优化建议。
+
+## setData
+```
+Page.prototype.setData(Object data, Function callback)
+setData 函数用于将数据从逻辑层发送到视图层（异步），同时改变对应的 this.data 的值（同步）。
+```
+* 避免setData的数据过大
+* 避免setData的调用过于频繁
+* 避免将未绑定在WXML的变量传入setData
 
 ## 参考文档
 

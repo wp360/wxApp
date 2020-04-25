@@ -1,7 +1,9 @@
 //app.js
 App({
-  onLaunch: function () {
-
+  onLaunch: function (options) {
+    console.log('onLaunch执行')
+    console.log(options)
+    this.checkUpdate()
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -24,6 +26,11 @@ App({
       openid: -1
     }
   },
+  // 切换前台
+  onShow(options) {
+    console.log('onShow执行')
+    console.log(options)
+  },
   setPlayMusicId(musicId) {
     this.globalData.playingMusicId = musicId
   },
@@ -38,6 +45,26 @@ App({
       this.globalData.openid = openId
       if (wx.getStorageSync(openId) == '') {
         wx.setStorageSync(openId, [])
+      }
+    })
+  },
+  // 版本检查
+  checkUpdate() {
+    const updateManager = wx.getUpdateManager()
+    // 检测版本更新
+    updateManager.onCheckForUpdate((res) => {
+      if(res.hasUpdate) {
+        updateManager.onUpdateReady(() => {
+          wx.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好，是否重启应用',
+            success(res) {
+              if(res.confirm) {
+                updateManager.applyUpdate()
+              }
+            }
+          })
+        })
       }
     })
   }

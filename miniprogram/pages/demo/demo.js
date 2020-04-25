@@ -5,7 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    num: 0,
+    testData: 0,
+    testObj: {
+      name: 'haidebaozi',
+      age: 32
+    }
   },
   // 两个方法调用同一个云函数
   // 获取音乐信息
@@ -40,6 +45,14 @@ Page({
         console.log(res)
       }
     })
+    // setData
+    console.log('testData 开始：' + this.data.testData)
+    this.setData({
+      testData: 1
+    }, () => {
+      console.log('回调执行')
+    })
+    console.log('testData 设置后：' + this.data.testData)
   },
 
   onGetUserInfo(event) {
@@ -51,6 +64,23 @@ Page({
       name: 'login'
     }).then((res) => {
       console.log(res)
+    })
+  },
+
+  // 点击增加数值
+  add() {
+    this.setData({
+      num: this.data.num + 1
+    })
+  },
+
+  //点击更新年龄
+  changeAge() {
+    this.setData({
+      // testObj: {
+      //   age: 33
+      // }
+      ['testObj.age']: 33
     })
   },
 
