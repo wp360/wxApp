@@ -588,3 +588,56 @@ router.use('/swiper', swiper.routes())
 · callCloudStorage封装删除方法
 · 前端界面引入
 ```
+## 博客
+* 1. 添加api接口blog.js
+```js
+// vue-admin-template/src/api/blog.js
+import request from '@/utils/request'
+const baseURL = 'http://localhost:3000'
+
+export function fetchList(params) {
+  return request({
+    url: `${baseURL}/blog/list`,
+    method: 'get',
+    params: {
+      ...params
+    }
+  })
+}
+```
+* 2. 博客列表页面blog.vue
+```js
+import { fetchList } from '@/api/blog'
+export default {
+  data() {
+    return {
+      blogList: [],
+      count: 50
+    }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    getList() {
+      fetchList({
+        start: this.blogList.length,
+        count: this.count
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+  }
+}
+```
+* 3. 后端对应方法
+```js
+// vue-admin-template/server/controller/blog.js
+```
+* 4. 页面信息展示
+* 5. 添加删除功能
+* 6. 完成测试

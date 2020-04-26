@@ -22,7 +22,7 @@
       <el-table-column
         type="index"
         width="50"
-      ></el-table-column>
+      />
       <el-table-column
         label="图片"
         width="400"
@@ -32,7 +32,7 @@
             :src="scope.row.download_url"
             alt
             height="50"
-          />
+          >
         </template>
       </el-table-column>
 
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { fetchList, del } from "@/api/swiper"
+import { fetchList, del } from '@/api/swiper'
 export default {
   data() {
     return {
@@ -94,8 +94,8 @@ export default {
     uploadSuccess(res) {
       if (res.id_list.length > 0) {
         this.$message({
-          message: "上传成功",
-          type: "success"
+          message: '上传成功',
+          type: 'success'
         })
         this.getList()
       }
@@ -112,8 +112,8 @@ export default {
         this.loading = false
         this.getList()
         this.$message({
-          message: "删除成功",
-          type: "success"
+          message: '删除成功',
+          type: 'success'
         })
       })
     }
