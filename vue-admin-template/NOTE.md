@@ -534,3 +534,57 @@ router.get('/del', async (ctx, next) => {
 
 ```
 * 5. 页面删除方法添加
+## 轮播图
+* 1. 云开发控制台点击存储，新建swiper文件夹，上传图片文件
+* 2. 云开发控制台点击数据库，创建集合swiper，添加记录 fileid 》 File ID（存储后生成的值）
+* 3. 添加api接口swiper.js
+```js
+// vue-admin-template/src/api/swiper.js
+import request from '@/utils/request'
+const baseURL = 'http://localhost:3000'
+
+export function fetchList() {
+  return request({
+    url: `${baseURL}/swiper/list`,
+    method: 'get'
+  })
+}
+```
+* 4. swiper页面引入接口及相关方法添加
+* 5. 后端添加对应接口
+```js
+// vue-admin-template/server/controller/swiper.js
+const Router = require('koa-router')
+const router = new Router()
+const callCloudDB = require('../utils/callCloudDB')
+
+router.get('/list', async (ctx, next) => {
+    // 默认10条数据
+    const query = `db.collection('swiper').get()`
+    const res = await callCloudDB(ctx, 'databasequery', query)
+    console.log(res)
+})
+
+module.exports = router
+```
+* 6. app.js引入
+```js
+const swiper = require('./controller/swiper')
+router.use('/swiper', swiper.routes())
+```
+* 7. batchDownloadFile获取文件下载链接
+[https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/storage/batchDownloadFile.html](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/storage/batchDownloadFile.html)
+* 8. 调用云存储方法
+```js
+// callCloudStorage.js
+```
+* 9. 界面显示
+* 10. upload文件上传
+* 11. 删除功能
+```
+· 界面添加删除按钮方法
+· 添加删除api接口
+· 后端添加对应方法（删除云数据库中的内容、删除云存储中的文件）
+· callCloudStorage封装删除方法
+· 前端界面引入
+```

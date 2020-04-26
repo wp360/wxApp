@@ -58,9 +58,9 @@ export const constantRoutes = [
         component: () => import('@/views/playlist/edit'),
         meta: {
           title: '编辑歌单',
-          icon: 'table',
-          hidden: true
-        }
+          icon: 'table'
+        },
+        hidden: true
       }
     ]
   },
@@ -68,8 +68,8 @@ export const constantRoutes = [
     path: '/swiper',
     component: Layout,
     children: [{
-      path: 'swiper',
-      component: () => import('@/views/swiper/swiper'),
+      path: 'list',
+      component: () => import('@/views/swiper/list'),
       meta: {
         title: '轮播图管理',
         icon: 'example'

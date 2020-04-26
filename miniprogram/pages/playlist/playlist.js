@@ -1,5 +1,7 @@
 // miniprogram/pages/playlist/playlist.js
 const MAX_LIMIT = 15
+// 读取数据库
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -8,15 +10,15 @@ Page({
   data: {
     // openid: ''
     swiperImgUrls: [
-      {
-        url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
-      },
-      {
-        url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
-      },
-      {
-        url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
-      }
+      // {
+      //   url: 'http://p1.music.126.net/oeH9rlBAj3UNkhOmfog8Hw==/109951164169407335.jpg',
+      // },
+      // {
+      //   url: 'http://p1.music.126.net/xhWAaHI-SIYP8ZMzL9NOqg==/109951164167032995.jpg',
+      // },
+      // {
+      //   url: 'http://p1.music.126.net/Yo-FjrJTQ9clkDkuUCTtUg==/109951164169441928.jpg',
+      // }
     ],
     playlist: [
     // {
@@ -72,6 +74,8 @@ Page({
     //   })
     // })
     this._getPlaylist()
+    // 轮播图
+    this._getSwiper()
   },
 
   /**
@@ -110,6 +114,7 @@ Page({
       playlist: []
     })
     this._getPlaylist()
+    this._getSwiper()
   },
 
   /**
@@ -148,5 +153,19 @@ Page({
       // 去除loading
       wx.hideLoading()
     })
+  },
+  /**
+   * 轮播图
+   */
+  _getSwiper() {
+    db.collection('swiper').get()
+      .then((res) => {
+        this.setData({
+          swiperImgUrls: res.data
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 })
