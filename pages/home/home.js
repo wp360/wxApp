@@ -2,6 +2,7 @@
 // 导入配置文件
 // import {config} from '../../config/config'
 import {Theme} from '../../model/theme'
+import {Banner} from '../../model/banner'
 
 Page({
 
@@ -9,13 +10,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topTheme: null
+    // topTheme: null
+    themeA: null,
+    bannerB: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
+  async onLoad(options) {
+  // onLoad: async function (options) {
     // wx.request({
     //   url: 'http://se.7yue.pro/v1/theme/by/names',
     //   method: 'GET',
@@ -49,10 +53,25 @@ Page({
     //   })
     // })
 
-    const data = await Theme.getHomeLocationA()
-    // console.log(data)
+    // const data = await Theme.getHomeLocationA()
+    // // console.log(data)
+    // this.setData({
+    //   topTheme: data[0]
+    // })
+    this.initAllData()
+  },
+
+  /**
+   * 初始化全部数据
+   */
+  async initAllData() {
+    // 首页头部专题
+    const themeA = await Theme.getHomeLocationA()
+    // 首页轮播数据
+    const bannerB = await Banner.getHomeLocationB()
     this.setData({
-      topTheme: data[0]
+      themeA: themeA[0],
+      bannerB
     })
   },
 

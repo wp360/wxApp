@@ -1,6 +1,11 @@
 /* pages/home/home.wxss */
+/* rpx px 自适应 */
 .top-theme {
   width: 100%;
   height: 260rpx;
 }
-/* rpx px 自适应 */
+
+.swiper {
+  width: 100%;
+  height: 360rpx;
+}

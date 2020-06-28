@@ -193,6 +193,67 @@ class Theme {
   },
 ```
 
+## 首页轮播
+* 1. 新建banner.js
+```js
+// model >> banner.js
+import {Http} from '../utils/http'
+
+class Banner {
+  static locationB = 'b-1'
+  static async getHomeLocationB() {
+    return await Http.request({
+      url: `banner/name/${Banner.locationB}`
+    })
+  }
+}
+
+export {
+  Banner
+}
+```
+
+* 2. 调用方法
+```js
+// home.js
+import {Theme} from '../../model/theme'
+import {Banner} from '../../model/banner'
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    // topTheme: null
+    themeA: null,
+    bannerB: null
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  async onLoad(options) {
+    this.initAllData()
+  },
+
+  /**
+   * 初始化全部数据
+   */
+  async initAllData() {
+    // 首页头部专题
+    const themeA = await Theme.getHomeLocationA()
+    // 首页轮播数据
+    const bannerB = await Banner.getHomeLocationB()
+    this.setData({
+      themeA: themeA[0],
+      bannerB
+    })
+  },
+```
+
+* 3. 页面布局（小程序swiper的使用）
+[https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)
+
+* 4. 添加样式
+
 ## git 远程分支上传
 ```
 git remote add origin https://github.com/wp360/wxApp.git
