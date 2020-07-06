@@ -12,8 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // topTheme: null
     themeA: null,
+    themeE: null,
     bannerB: null,
     grid: [],
     activity: null
@@ -23,45 +23,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
-  // onLoad: async function (options) {
-    // wx.request({
-    //   url: 'http://se.7yue.pro/v1/theme/by/names',
-    //   method: 'GET',
-    //   data: {
-    //     names: 't-1'
-    //   },
-    //   header: {
-    //     appkey: '9cCrZsHIi3wdAOfN'
-    //   }
-    // })
-    // wx.request({
-    //   url: `${config.apiBaseUrl}theme/by/names`,
-    //   method: 'GET',
-    //   data: {
-    //     names: 't-1'
-    //   },
-    //   header: {
-    //     appkey: config.appkey
-    //   },
-    //   success: res => {
-    //     console.log(res)
-    //     this.setData({
-    //       topTheme: res.data[0]
-    //     })
-    //   }
-    // })
-
-    // Theme.getHomeLocationA(data => {
-    //   this.setData({
-    //     topTheme: data[0]
-    //   })
-    // })
-
-    // const data = await Theme.getHomeLocationA()
-    // // console.log(data)
-    // this.setData({
-    //   topTheme: data[0]
-    // })
     this.initAllData()
   },
 
@@ -70,7 +31,13 @@ Page({
    */
   async initAllData() {
     // 首页头部专题
-    const themeA = await Theme.getHomeLocationA()
+    // const themeA = await Theme.getHomeLocationA()
+    // 获取全部专题数据
+    const theme = new Theme()
+    await theme.getThemes()
+    const themeA = await theme.getHomeLocationA()
+    // 每周上新
+    const themeE = await theme.getHomeLocationE()
     // 首页轮播数据
     const bannerB = await Banner.getHomeLocationB()
     // 六宫格
@@ -78,7 +45,9 @@ Page({
     // 优惠券
     const activity = await Activity.getHomeActivity()
     this.setData({
-      themeA: themeA[0],
+      // themeA: themeA[0],
+      themeA,
+      themeE,
       bannerB,
       grid,
       activity

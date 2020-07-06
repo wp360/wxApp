@@ -231,6 +231,45 @@ import {Banner} from '../../model/banner'
    * 生命周期函数--监听页面加载
    */
   async onLoad(options) {
+  // onLoad: async function (options) {
+    // wx.request({
+    //   url: 'http://se.7yue.pro/v1/theme/by/names',
+    //   method: 'GET',
+    //   data: {
+    //     names: 't-1'
+    //   },
+    //   header: {
+    //     appkey: '9cCrZsHIi3wdAOfN'
+    //   }
+    // })
+    // wx.request({
+    //   url: `${config.apiBaseUrl}theme/by/names`,
+    //   method: 'GET',
+    //   data: {
+    //     names: 't-1'
+    //   },
+    //   header: {
+    //     appkey: config.appkey
+    //   },
+    //   success: res => {
+    //     console.log(res)
+    //     this.setData({
+    //       topTheme: res.data[0]
+    //     })
+    //   }
+    // })
+
+    // Theme.getHomeLocationA(data => {
+    //   this.setData({
+    //     topTheme: data[0]
+    //   })
+    // })
+
+    // const data = await Theme.getHomeLocationA()
+    // // console.log(data)
+    // this.setData({
+    //   topTheme: data[0]
+    // })
     this.initAllData()
   },
 
@@ -324,6 +363,166 @@ import {Activity} from '../../model/activity'
 page {
   background-color: #f5f5f5;
 }
+```
+
+## 首页每周上新
+
+* 1. 页面到底是否应该合并HTTP请求？
+```
+每一个数据http
+Home只发送一个http
+有选择的把部分http请求合并成一个
+
+衡量指标
+1. http请求数量
+2. http多少次数据库查询join
+3. 接口的灵活性，可维护性
+```
+
+* 2. 合并全部专题接口
+```js
+class Theme {
+  // 接口参数
+  static locationA = 't-1'
+  static locationE = 't-2'
+  static locationF = 't-3'
+  static locationH = 't-4'
+
+  static async getThemes() {
+    const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
+    return await Http.request({
+      url: `theme/by/names`,
+      data: {
+        names
+      }
+    })
+  }
+}
+```
+
+* 3. 首页接口调用
+```js
+// home.js
+// 获取全部专题数据
+const themes = await Theme.getThemes()
+// name = 't-1'
+// for (let theme of themes) {
+//   if theme.name === 't-1'
+// }
+// 集合
+// 函数式编程
+// find、filter、map、some、reduce
+const themeA = themes.find(t => t.name === 't-1')
+// 保存数据 类的对象 本身就具有保存数据的功能
+// 类能够保存数据 但不能保存状态
+// 类的对象 数据 状态
+// 符号
+// 每周上新
+const themeE = themes.find(t => t.name === 't-2')
+```
+
+* 4. 重构theme接口
+```js
+// model/theme.js
+import {
+  Http
+} from '../utils/http'
+
+class Theme {
+  // 接口参数
+  static locationA = 't-1'
+  static locationE = 't-2'
+  static locationF = 't-3'
+  static locationH = 't-4'
+
+  themes = []
+
+  // 出于扩展性考虑，去除static
+  async getThemes() {
+    const names = `${Theme.locationA}, ${Theme.locationE}, ${Theme.locationF}, ${Theme.locationH}`
+    this.themes = await Http.request({
+      url: `theme/by/names`,
+      data: {
+        names
+      }
+    })
+  }
+
+  async getHomeLocationA() {
+    return this.themes.find(t => t.name === Theme.locationA)
+    // return await Http.request({
+    //   url: `theme/by/names`,
+    //   data: {
+    //     names: Theme.locationA
+    //   }
+    // })
+  }
+
+  // 每周上新
+  async getHomeLocationE() {
+    return this.themes.find(t => t.name === Theme.locationE)
+    // return await Http.request({
+    //   url: `theme/by/names`,
+    //   data: {
+    //     names: Theme.locationE
+    //   }
+    // })
+  }
+
+  // static getHomeLocationA(callback) {
+  //   Http.request({
+  //     url: `theme/by/names`,
+  //     data: {
+  //       names: 't-1'
+  //     },
+  //     callback: data => {
+  //       callback(data)
+  //     }
+  //   })
+    // wx.request({
+    //   url: `${config.apiBaseUrl}theme/by/names`,
+    //   method: 'GET',
+    //   data: {
+    //     names: 't-1'
+    //   },
+    //   header: {
+    //     appkey: config.appkey
+    //   },
+    //   success: res => {
+    //     // console.log(res)
+    //     callback(res.data)
+    //   }
+    // })
+  //  }
+}
+
+export {
+  Theme
+}
+```
+
+* 5. 首页接口调用修改
+```js
+// home.js
+  data: {
+    // topTheme: null
+    themeA: null,
+    themeE: null,
+    bannerB: null,
+    grid: [],
+    activity: null
+  },
+// ...
+// 获取全部专题数据
+const theme = new Theme()
+await theme.getThemes()
+// const themes = await Theme.getThemes()
+// const themeA = themes.find(t => t.name === 't-1')
+const themeA = await theme.getHomeLocationA()
+// 每周上新
+// const themeE = themes.find(t => t.name === 't-2')
+const themeE = await theme.getHomeLocationE()
+// 原则： 调用方 调用过程 简单的
 ```
 
 ## git 远程分支上传

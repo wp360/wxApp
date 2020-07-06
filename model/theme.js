@@ -7,39 +7,33 @@ import {
 } from '../utils/http'
 
 class Theme {
-  static async getHomeLocationA() {
-    return await Http.request({
+  // 接口参数
+  static locationA = 't-1'
+  static locationE = 't-2'
+  static locationF = 't-3'
+  static locationH = 't-4'
+
+  themes = []
+
+  // 出于扩展性考虑，去除static
+  async getThemes() {
+    const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
+    this.themes = await Http.request({
       url: `theme/by/names`,
       data: {
-        names: 't-1'
+        names
       }
     })
   }
-  // static getHomeLocationA(callback) {
-  //   Http.request({
-  //     url: `theme/by/names`,
-  //     data: {
-  //       names: 't-1'
-  //     },
-  //     callback: data => {
-  //       callback(data)
-  //     }
-  //   })
-    // wx.request({
-    //   url: `${config.apiBaseUrl}theme/by/names`,
-    //   method: 'GET',
-    //   data: {
-    //     names: 't-1'
-    //   },
-    //   header: {
-    //     appkey: config.appkey
-    //   },
-    //   success: res => {
-    //     // console.log(res)
-    //     callback(res.data)
-    //   }
-    // })
-  //  }
+
+  async getHomeLocationA() {
+    return this.themes.find(t => t.name === Theme.locationA)
+  }
+
+  // 每周上新
+  async getHomeLocationE() {
+    return this.themes.find(t => t.name === Theme.locationE)
+  }
 }
 
 export {
