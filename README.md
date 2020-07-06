@@ -254,6 +254,78 @@ import {Banner} from '../../model/banner'
 
 * 4. 添加样式
 
+## 六宫格
+* 1. npm init
+
+* 2. package.json设置
+```json
+  "dependencies": {
+    "lin-ui": "~0.6.0"
+  },
+```
+
+* 3. npm的semver语法规则
+
+* 4. Lin UI的安装
+`npm i`
+
+* 5. 构建npm
+> 小程序开发者工具 》工具 》 构建npm 》 完成构建 》 确定
+
+## 首页优惠券
+
+* 1. API接口
+```js
+// activity.js
+import {Http} from '../utils/http'
+
+class Activity {
+  static locationD = 'a-2'
+  static async getHomeActivity() {
+    return await Http.request({
+      url: `activity/name/${Activity.locationD}`
+    })
+  }
+}
+
+export {
+  Activity
+}
+```
+
+* 2. 首页调用
+```js
+// home.js
+import {Activity} from '../../model/activity'
+
+  data: {
+    // ...
+    activity: null
+  },
+
+  async initAllData() {
+    // ...
+    // 优惠券
+    const activity = await Activity.getHomeActivity()
+    this.setData({
+      // ...
+      activity
+    })
+  },
+
+```
+
+* 3. 首页页面添加优惠券图片及调整样式
+
+* 4. 背景颜色设置
+```
+>> app.wxss添加
+
+page {
+  background-color: #f5f5f5;
+}
+```
+
 ## git 远程分支上传
 ```
 git remote add origin https://github.com/wp360/wxApp.git

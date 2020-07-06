@@ -3,6 +3,8 @@
 // import {config} from '../../config/config'
 import {Theme} from '../../model/theme'
 import {Banner} from '../../model/banner'
+import {Category} from '../../model/category'
+import {Activity} from '../../model/activity'
 
 Page({
 
@@ -12,7 +14,9 @@ Page({
   data: {
     // topTheme: null
     themeA: null,
-    bannerB: null
+    bannerB: null,
+    grid: [],
+    activity: null
   },
 
   /**
@@ -69,9 +73,15 @@ Page({
     const themeA = await Theme.getHomeLocationA()
     // 首页轮播数据
     const bannerB = await Banner.getHomeLocationB()
+    // 六宫格
+    const grid = await Category.getGridCategory()
+    // 优惠券
+    const activity = await Activity.getHomeActivity()
     this.setData({
       themeA: themeA[0],
-      bannerB
+      bannerB,
+      grid,
+      activity
     })
   },
 
