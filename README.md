@@ -525,6 +525,58 @@ const themeE = await theme.getHomeLocationE()
 // 原则： 调用方 调用过程 简单的
 ```
 
+* 6. spu-scroll组件
+
+* 7. 使用Lin UI Price价格组件
+```json
+// app.json
+  "usingComponents": {
+    "l-grid": "/miniprogram_npm/lin-ui/grid/index",
+    "l-grid-item": "/miniprogram_npm/lin-ui/grid-item/index",
+    "l-price": "/miniprogram_npm/lin-ui/price/index"
+  }
+```
+* 8. 引入价格组件
+```
+<s-spu-scroll
+  wx:if="{{themeE.online}}"
+  theme="{{themeE}}"
+  spu-list="{{themeESpu}}"
+>
+</s-spu-scroll>
+```
+
+* 9. 关于使用scroll-view去除enable-flex，添加内容view，解决默认空白问题。
+
+* 10. 关于处理单行标题显示
+```
+解决办法：
+1. 数据预处理（文本截取）
+
+2. wxs的使用
+===========================
+<wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
+
+<text class="spu-text">{{item.title.length > 8 ? s.substring(item.title, 0, 7) + '...' : item.title}}</text>
+
+3. css样式
+===========================
+.spu-text {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 20rpx;
+  width: 150rpx;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+## SPU、SKU的概念
+> SPU = Standard Product Unit 标准化产品单元
+> SKU = Stock Keeping Unit 库存量单位
+
 ## git 远程分支上传
 ```
 git remote add origin https://github.com/wp360/wxApp.git

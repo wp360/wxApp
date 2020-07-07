@@ -36,8 +36,20 @@ Page({
     const theme = new Theme()
     await theme.getThemes()
     const themeA = await theme.getHomeLocationA()
+
     // 每周上新
     const themeE = await theme.getHomeLocationE()
+    // 首页显示的spu列表数据
+    let themeESpu = []
+    // 判断商品是否上架状态
+    if(themeE.online) {
+      // spu数据
+      const data = await Theme.getHomeLocationESpu()
+      if(data) {
+        themeESpu = data.spu_list.splice(0, 8)
+      }
+    }
+
     // 首页轮播数据
     const bannerB = await Banner.getHomeLocationB()
     // 六宫格
@@ -48,6 +60,7 @@ Page({
       // themeA: themeA[0],
       themeA,
       themeE,
+      themeESpu,
       bannerB,
       grid,
       activity
