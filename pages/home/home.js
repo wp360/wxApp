@@ -18,7 +18,8 @@ Page({
     bannerB: null,
     grid: [],
     activity: null,
-    hotList: null
+    hotList: null,
+    themeH: null
   },
 
   /**
@@ -38,32 +39,31 @@ Page({
     const theme = new Theme()
     await theme.getThemes()
     const themeA = theme.getHomeLocationA()
-
-    // 每周上新
-    const themeE = theme.getHomeLocationE()
-
-    // 首页显示的spu列表数据
-    let themeESpu = []
-    // 判断商品是否上架状态
-    if(themeE.online) {
-      // spu数据
-      const data = await Theme.getHomeLocationESpu()
-      if(data) {
-        themeESpu = data.spu_list.splice(0, 8)
-      }
-    }
-
-    // 臻选
-    const themeF = theme.getHomeLocationF()
-
     // 首页轮播数据
     const bannerB = await Banner.getHomeLocationB()
     // 六宫格
     const grid = await Category.getGridCategory()
     // 优惠券
     const activity = await Activity.getHomeActivity()
+    // 每周上新
+    const themeE = theme.getHomeLocationE()
+    // 首页显示的spu列表数据
+    let themeESpu = []
+    // 判断商品是否上架状态
+    if (themeE.online) {
+      // spu数据
+      const data = await Theme.getHomeLocationESpu()
+      if (data) {
+        themeESpu = data.spu_list.splice(0, 8)
+      }
+    }
+    // 臻选
+    const themeF = theme.getHomeLocationF()
     // 热卖榜单
     const hotList = await Banner.getHomeHotList()
+    // 时尚出街
+    const themeH = theme.getHomeLocationH()
+
     this.setData({
       // themeA: themeA[0],
       themeA,
@@ -73,7 +73,8 @@ Page({
       bannerB,
       grid,
       activity,
-      hotList
+      hotList,
+      themeH
     })
   },
 

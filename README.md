@@ -680,6 +680,21 @@ observers: {
 
 * 9. hot-list样式
 
+## 时尚出街
+
+## Hover点击态的应用
+
+* 1. 新建样式（wxss >> sleeve.wxss >> .rect-hover）
+
+* 2. @import导入样式
+
+* 3. 页面使用hover-class
+```
+<view hover-class="rect-hover" hover-stay-time="300">
+  <image class="left" src="{{left.img}}"></image>
+</view>
+```
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

@@ -40,6 +40,11 @@ class Theme {
     return this.themes.find(t => t.name === Theme.locationF)
   }
 
+  // 时尚出街
+  getHomeLocationH() {
+    return this.themes.find(t => t.name === Theme.locationH)
+  }
+
   static getHomeLocationESpu() {
     return Theme.getThemeSpuByName(Theme.locationE)
   }

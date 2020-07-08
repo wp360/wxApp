@@ -23,4 +23,6 @@
   <image src="{{themeF.entrance_img}}" class="quality"></image>
   <!-- 热卖榜单 -->
   <s-hot-list banner="{{hotList}}"></s-hot-list>
+  <!-- 时尚出街 -->
+  <image src="{{themeH.entrance_img}}" class="fashion"></image>
 </view>
