@@ -17,7 +17,8 @@ Page({
     themeF: null,
     bannerB: null,
     grid: [],
-    activity: null
+    activity: null,
+    hotList: null
   },
 
   /**
@@ -36,10 +37,10 @@ Page({
     // 获取全部专题数据
     const theme = new Theme()
     await theme.getThemes()
-    const themeA = await theme.getHomeLocationA()
+    const themeA = theme.getHomeLocationA()
 
     // 每周上新
-    const themeE = await theme.getHomeLocationE()
+    const themeE = theme.getHomeLocationE()
 
     // 首页显示的spu列表数据
     let themeESpu = []
@@ -53,7 +54,7 @@ Page({
     }
 
     // 臻选
-    const themeF = await theme.getHomeLocationF()
+    const themeF = theme.getHomeLocationF()
 
     // 首页轮播数据
     const bannerB = await Banner.getHomeLocationB()
@@ -61,6 +62,8 @@ Page({
     const grid = await Category.getGridCategory()
     // 优惠券
     const activity = await Activity.getHomeActivity()
+    // 热卖榜单
+    const hotList = await Banner.getHomeHotList()
     this.setData({
       // themeA: themeA[0],
       themeA,
@@ -69,7 +72,8 @@ Page({
       themeF,
       bannerB,
       grid,
-      activity
+      activity,
+      hotList
     })
   },
 

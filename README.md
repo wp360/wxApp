@@ -597,6 +597,89 @@ Component({
 
 ## 首页臻选
 
+## 热卖榜单
+
+* 1. 新建自定义组件hot-list
+
+* 2. 组件添加banner属性
+
+* 3. 引入hot-list组件(home.json)
+```json
+{
+  "usingComponents": {
+    "s-category-grid": "/components/category-grid/index",
+    "s-spu-scroll": "/components/spu-scroll/index",
+    "s-hot-list": "/components/hot-list/index"
+  }
+}
+```
+
+* 4. 页面添加(home.wxml)
+
+* 5. 获取数据
+```js
+// model/banner.js
+class Banner {
+  static hotList   = 'b-2'
+
+  static async getHomeHotList() {
+    return await Http.request({
+      url: `banner/name/${Banner.hotList}`
+    })
+  }
+}
+```
+
+* 6. 首页调用数据接口
+```js
+// home.js
+data: {
+  // ...
+  hotList: null
+},
+
+// 热卖榜单
+const hotList = await Banner.getHomeHotList()
+this.setData({
+  // ...
+  hotList
+})
+```
+
+* 7. hot-list组件页面
+
+* 8. 监听器的使用
+```js
+// hot-list.js
+observers: {
+  // 可以监听多个
+  // 'banner, theme': function (banner, theme) {
+
+  // }
+  'banner': function(banner) {
+    if(!banner) {
+      return
+    }
+
+    if(banner.items.length === 0) {
+      return
+    }
+
+    const left = banner.items.find(i => i.name === 'left')
+    const rightTop = banner.items.find(i => i.name === 'right-top')
+    const rightBottom = banner.items.find(i => i.name === 'right-bottom')
+
+    this.setData({
+      left,
+      rightTop,
+      rightBottom
+    })
+  }
+},
+```
+
+* 9. hot-list样式
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

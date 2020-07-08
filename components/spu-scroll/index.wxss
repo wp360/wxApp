@@ -7,7 +7,7 @@
 }
 
 .title {
-  width: 694rpx;
+  width: 690rpx;
   height: 90rpx;
 }
 

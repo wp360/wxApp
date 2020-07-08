@@ -26,17 +26,17 @@ class Theme {
     })
   }
 
-  async getHomeLocationA() {
+  getHomeLocationA() {
     return this.themes.find(t => t.name === Theme.locationA)
   }
 
   // 每周上新
-  async getHomeLocationE() {
+  getHomeLocationE() {
     return this.themes.find(t => t.name === Theme.locationE)
   }
 
   // 臻选
-  async getHomeLocationF() {
+  getHomeLocationF() {
     return this.themes.find(t => t.name === Theme.locationF)
   }
 
