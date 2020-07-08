@@ -573,6 +573,28 @@ const themeE = await theme.getHomeLocationE()
 }
 ```
 
+## 组件外部样式类设置
+
+* 1. 组件js添加externalClasses
+```js
+Component({
+  /**
+   * 组件的属性列表
+   */
+  externalClasses: ['l-class'],
+  // ...
+})
+```
+
+* 2. 组件上添加class，对应页面上使用l-class
+
+* 3. 关于添加样式边距还可以采用自定义组件外再新增一个view
+```
+  <view class="spu-scroll">
+    <!-- 自定义的组件 -->
+  </view>
+```
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

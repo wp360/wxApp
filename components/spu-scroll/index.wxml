@@ -1,6 +1,6 @@
 <!--components/spu-scroll/index.wxml-->
 <wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
-<view class="container">
+<view class="container l-class">
   <image class="title" src="{{theme.title_img}}"></image>
   <!-- enable-flex -->
   <scroll-view class="scroll-view" scroll-x>

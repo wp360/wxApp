@@ -16,6 +16,7 @@
     wx:if="{{themeE.online}}"
     theme="{{themeE}}"
     spu-list="{{themeESpu}}"
+    l-class="spu-scroll"
   >
   </s-spu-scroll>
 </view>
