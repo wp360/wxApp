@@ -14,6 +14,7 @@ Page({
   data: {
     themeA: null,
     themeE: null,
+    themeF: null,
     bannerB: null,
     grid: [],
     activity: null
@@ -39,6 +40,7 @@ Page({
 
     // 每周上新
     const themeE = await theme.getHomeLocationE()
+
     // 首页显示的spu列表数据
     let themeESpu = []
     // 判断商品是否上架状态
@@ -49,6 +51,9 @@ Page({
         themeESpu = data.spu_list.splice(0, 8)
       }
     }
+
+    // 臻选
+    const themeF = await theme.getHomeLocationF()
 
     // 首页轮播数据
     const bannerB = await Banner.getHomeLocationB()
@@ -61,6 +66,7 @@ Page({
       themeA,
       themeE,
       themeESpu,
+      themeF,
       bannerB,
       grid,
       activity

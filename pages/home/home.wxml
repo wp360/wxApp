@@ -19,4 +19,6 @@
     l-class="spu-scroll"
   >
   </s-spu-scroll>
+  <!-- 臻选 -->
+  <image src="{{themeF.entrance_img}}" class="quality"></image>
 </view>

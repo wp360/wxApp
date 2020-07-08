@@ -595,6 +595,8 @@ Component({
   </view>
 ```
 
+## 首页臻选
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位
