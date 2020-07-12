@@ -695,6 +695,108 @@ observers: {
 </view>
 ```
 
+## 首页瀑布流
+
+* 1. 引入lin-ui瀑布流组件
+```json
+// home.json
+{
+  "usingComponents": {
+    // ...
+    "l-water-flow": "/miniprogram_npm/lin-ui/water-flow/index"
+  }
+}
+```
+
+* 2. wxml页面添加组件
+```
+  <!-- 瀑布流 -->
+  <view class="spu-bottom">
+    <image class="title-spu-bottom" src="/imgs/home/title@interest.png"></image>
+    <!-- 数据待添加 -->
+    <l-water-flow generic:l-water-flow-item=""><l-water-flow>
+  </view>
+```
+
+* 3. 自定义商品组件
+> sup-preview >> index
+
+* 4. 商品数据
+> sup-preview/index.js
+
+* 5. 数据接口
+```js
+// home.js
+// ...
+  /**
+   * 首页底部瀑布流
+   */
+  async initBottomSpuList() {
+    // ...
+  },
+```
+
+* 6. 数据模型
+```js
+// model >> spu-paging.js
+/**
+ * 关于分页数据
+ */
+// 1. 返回为空 一条数据也没有
+// 2. 最后一页，是否有更多数据
+// 3. 累加 100 1-20 21-40 ... setData重新渲染页面
+// 4. 非分页数据： a. 正在加载 loading b. 空
+//    分页数据： a. 正在加载 b. 加载完成 c. 没有更多数据
+// 5. 上滑页面触底 加载 避免用户重复发送请求 redis 数据锁
+//    按钮 button 防抖节流 禁用 倒计时 模态 loading
+// start count 0，10
+
+import {Paging} from '../utils/paging'
+
+class spuPaging {
+  static getLasestPaging() {
+    return new Paging({
+      url: `spu/latest`
+    }, 3)
+  }
+}
+
+export {
+  spuPaging
+}
+```
+
+* 7. 分页模块
+> utils/paging.js
+
+* 8. 首页调用
+```js
+// home.js
+import {spuPaging} from '../../model/spu-paging'
+// ...
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  async onLoad(options) {
+    this.initAllData()
+    // 首页底部瀑布流
+    this.initBottomSpuList()
+  },
+
+  /**
+   * 首页底部瀑布流
+   */
+  async initBottomSpuList() {
+    const paging = await spuPaging.getLasestPaging()
+    const data = paging.getMoreData()
+    if(!data) {
+      return
+    }
+  },
+
+```
+
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

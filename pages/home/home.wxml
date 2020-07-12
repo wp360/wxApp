@@ -25,4 +25,9 @@
   <s-hot-list banner="{{hotList}}"></s-hot-list>
   <!-- 时尚出街 -->
   <image src="{{themeH.entrance_img}}" class="fashion"></image>
+  <!-- 瀑布流 -->
+  <view class="spu-bottom">
+    <image class="title-spu-bottom" src="/imgs/home/title@interest.png"></image>
+    <!-- <l-water-flow generic:l-water-flow-item=""><l-water-flow> -->
+  </view>
 </view>

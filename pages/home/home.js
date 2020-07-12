@@ -5,6 +5,7 @@ import {Theme} from '../../model/theme'
 import {Banner} from '../../model/banner'
 import {Category} from '../../model/category'
 import {Activity} from '../../model/activity'
+import {spuPaging} from '../../model/spu-paging'
 
 Page({
 
@@ -27,6 +28,7 @@ Page({
    */
   async onLoad(options) {
     this.initAllData()
+    this.initBottomSpuList()
   },
 
   /**
@@ -76,6 +78,17 @@ Page({
       hotList,
       themeH
     })
+  },
+
+  /**
+   * 首页底部瀑布流
+   */
+  async initBottomSpuList() {
+    const paging = await spuPaging.getLasestPaging()
+    const data = paging.getMoreData()
+    if(!data) {
+      return
+    }
   },
 
   /**
