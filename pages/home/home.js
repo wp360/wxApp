@@ -85,10 +85,12 @@ Page({
    */
   async initBottomSpuList() {
     const paging = await spuPaging.getLasestPaging()
-    const data = paging.getMoreData()
+    const data = await paging.getMoreData()
     if(!data) {
       return
     }
+    // 瀑布流
+    wx.lin.renderWaterFlow(data.items)
   },
 
   /**

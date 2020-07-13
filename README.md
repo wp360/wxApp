@@ -714,7 +714,7 @@ observers: {
   <view class="spu-bottom">
     <image class="title-spu-bottom" src="/imgs/home/title@interest.png"></image>
     <!-- 数据待添加 -->
-    <l-water-flow generic:l-water-flow-item=""><l-water-flow>
+    <l-water-flow generic:l-water-flow-item=""></l-water-flow>
   </view>
 ```
 
@@ -788,7 +788,7 @@ import {spuPaging} from '../../model/spu-paging'
    */
   async initBottomSpuList() {
     const paging = await spuPaging.getLasestPaging()
-    const data = paging.getMoreData()
+    const data = await paging.getMoreData()
     if(!data) {
       return
     }
@@ -796,6 +796,92 @@ import {spuPaging} from '../../model/spu-paging'
 
 ```
 
+## 首页瀑布流商品组件
+* 1. 页面布局
+```
+<!-- spu-preview内容： 图片、标题、标签、价格、简介 -->
+<view class="container">
+  <image src="{{data.img}}"></image>
+</view>
+
+```
+
+* 2. 商品数据
+```js
+// spu-preview/index.js
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    data: Object
+  },
+
+// ============================
+// pages/home/home.js
+  async initBottomSpuList() {
+    // ...
+    // 瀑布流
+    // wx.lin.renderWaterFlow()支持传入三个参数，第一个参数为data即为传入的数据信息，第二个参数为refresh为是否刷新数据(删除之前渲染的数据，重新渲染)。
+    wx.lin.renderWaterFlow(data.items)
+  },
+```
+
+* 3. 首页组件调用
+```
+  <!-- 瀑布流 -->
+  <view class="spu-bottom">
+    <image class="title-spu-bottom" src="/imgs/home/title@interest.png"></image>
+    <l-water-flow generic:l-water-flow-item="s-spu-preview"></l-water-flow>
+  </view>
+
+* 注意： s-spu-preview为自定义组件名称
+```
+
+* 4. app.json引入spu-preview自定义组件
+
+* 5. 商品标签
+```
+>> app.json引入lin-ui/tag组件
+"l-tag": "/miniprogram_npm/lin-ui/tag/index"
+
+>> 标签数据
+data: {
+  tags: Array
+},
+
+observers: {
+  data: function(data) {
+    if(!data) {
+      return
+    }
+
+    if(!data.tags) {
+      return
+    }
+    const tags = data.tags.split('$')
+    this.setData({
+      tags
+    })
+  }
+},
+
+
+>> 页面添加
+<view class="tags">
+  <block wx:for="{{tags}}" wx:key="index">
+    <l-tag l-class="l-tag" size="medium">{{item}}</l-tag>
+  </block>
+</view>
+
+>> 样式调整
+.l-tag {
+  background-color: #dcebe6 !important;
+  color: #157658 !important;
+  padding-left: 10rpx !important;
+  padding-right: 10rpx !important;
+  margin-right: 6rpx !important;
+}
+```
 
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
