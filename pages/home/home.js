@@ -21,7 +21,8 @@ Page({
     activity: null,
     hotList: null,
     themeH: null,
-    spuPaging: null
+    spuPaging: null,
+    loadingType: 'loading'
   },
 
   /**
@@ -140,6 +141,12 @@ Page({
       return
     }
     wx.lin.renderWaterFlow(data.items)
+    // 没有更多数据
+    if (!data.moreData) {
+      this.setData({
+        loadingType: 'end'
+      })
+    }
   },
 
   /**

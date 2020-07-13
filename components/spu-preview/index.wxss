@@ -11,7 +11,7 @@
 .content-container {
   display: flex;
   flex-direction: column;
-  padding: 4rpx 16rpx 22rpx 16rpx;
+  padding: 0 16rpx 22rpx 16rpx;
 }
 
 .img {

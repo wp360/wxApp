@@ -11,7 +11,7 @@
     </text>
     <view class="tags">
       <block wx:for="{{tags}}" wx:key="index">
-        <l-tag l-class="l-tag" size="mini">{{item}}</l-tag>
+        <l-tag type="reading" l-class="l-tag" size="mini">{{item}}</l-tag>
       </block>
     </view>
     <!-- 价格 -->

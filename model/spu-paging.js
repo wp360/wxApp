@@ -7,7 +7,7 @@ class spuPaging {
   static getLasestPaging() {
     return new Paging({
       url: `spu/latest`
-    }, 3)
+    }, 5)
   }
 }
 

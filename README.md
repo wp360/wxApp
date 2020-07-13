@@ -927,6 +927,53 @@ module.exports = {
 >> 使用wx.getImageInfo获取图片宽高（网络图片需要先配置download域名）
 ```
 
+* 9. 页底提示Loadmore
+```
+>> app.json引入l-loadmore组件
+"l-loadmore": "/miniprogram_npm/lin-ui/loadmore/index"
+
+>> 首页使用l-loadmore
+<l-loadmore show>
+  <view slot="content" class="container">
+    <!-- 省略 -->
+  </view>
+</l-loadmore>
+
+>> app.json设置距离底部
+"window": {
+  //...
+  "onReachBottomDistance": 100
+},
+```
+
+* 10. 没有更多数据
+```
+// home.js
+  data: {
+    // ...
+    loadingType: 'loading'
+  },
+
+  onReachBottom: async function () {
+    // 瀑布流加载更多
+    // ...
+    // 没有更多数据
+    if (!data.moreData) {
+      this.setData({
+        loadingType: 'end'
+      })
+    }
+  },
+
+// =================
+// home.wxml
+<l-loadmore show type="{{loadingType}}">
+```
+
+* 11. 每周上新修改对应价格显示
+
+* 12. 调整一次加载瀑布流显示数
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位
