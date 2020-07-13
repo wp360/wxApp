@@ -883,6 +883,41 @@ observers: {
 }
 ```
 
+* 6. 原价折扣价显示
+```
+>> 页面
+<!-- 原价 -->
+<l-price value="{{p.mainPrice(data.price, data.discount_price)}}"></l-price>
+<!-- 折扣价 -->
+<l-price wx:if="{{data.discount_price?true:false}}" deleted value="{{p.slashedPrice(data.price, data.discount_price)}}"></l-price>
+
+>> wxs价格显示判断
+// 主价格
+function mainPrice(price, discountPrice) {
+  if(!discountPrice) {
+    return price
+  } else {
+    return discountPrice
+  }
+}
+
+// 划线价格
+function slashedPrice(price, discountPrice) {
+  if(discountPrice) {
+    return price
+  } else {
+    return
+  }
+}
+
+module.exports = {
+  mainPrice: mainPrice,
+  slashedPrice: slashedPrice
+}
+
+>> 样式调整
+```
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

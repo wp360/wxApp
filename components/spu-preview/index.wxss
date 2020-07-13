@@ -1,6 +1,21 @@
 /* components/spu-preview/index.wxss */
-.img {
+.container {
   width: 340rpx;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px 0 rgba(119, 163, 149, 0.2);
+  margin-bottom: 30rpx;
+  background-color: white;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  padding: 22rpx 16rpx;
+}
+
+.img {
+  width: 100%;
   height: 360rpx;
 }
 
