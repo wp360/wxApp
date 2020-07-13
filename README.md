@@ -918,6 +918,15 @@ module.exports = {
 >> 样式调整
 ```
 
+* 7. 标题、内容样式调整
+
+* 8. 动态计算图片高和宽
+```
+>> mode="widthFix"设置
+>> 自定义方法bind:load="onImgLoad"，添加动态样式：style="width: {{w}}rpx;height:{{h}}rpx;"
+>> 使用wx.getImageInfo获取图片宽高（网络图片需要先配置download域名）
+```
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

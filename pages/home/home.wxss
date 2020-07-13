@@ -48,6 +48,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 20rpx;
+  background-color: white;
 }
 
 .title-spu-bottom {
