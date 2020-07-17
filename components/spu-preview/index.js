@@ -45,6 +45,15 @@ Component({
         w: 340,
         h: 340*height/width
       })
+    },
+    onItemTap(event) {
+      const pid = event.currentTarget.dataset.pid
+      // 跳转商品详情
+      wx.navigateTo({
+        url: `/pages/detail/detail?pid=${pid}`
+      })
+      // 如果使用通用组件可以传值
+      // this.triggerEvent('toDetail', pid)
     }
   }
 })

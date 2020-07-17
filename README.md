@@ -5,7 +5,7 @@
 ## 调用API数据接口
 
 ## 接口模块封装
-* 1. 新建文件夹model
+* 1. 新建文件夹models
 
 * 2. 新建专题模块theme.js
 ```js
@@ -39,7 +39,7 @@ export {
 * 3. 修改调用方法
 ```js
 // home.js
-import {Theme} from '../../model/theme'
+import {Theme} from '../../models/theme'
 // ...
   /**
    * 生命周期函数--监听页面加载
@@ -196,7 +196,7 @@ class Theme {
 ## 首页轮播
 * 1. 新建banner.js
 ```js
-// model >> banner.js
+// models >> banner.js
 import {Http} from '../utils/http'
 
 class Banner {
@@ -216,8 +216,8 @@ export {
 * 2. 调用方法
 ```js
 // home.js
-import {Theme} from '../../model/theme'
-import {Banner} from '../../model/banner'
+import {Theme} from '../../models/theme'
+import {Banner} from '../../models/banner'
   /**
    * 页面的初始数据
    */
@@ -335,7 +335,7 @@ export {
 * 2. 首页调用
 ```js
 // home.js
-import {Activity} from '../../model/activity'
+import {Activity} from '../../models/activity'
 
   data: {
     // ...
@@ -423,7 +423,7 @@ const themeE = themes.find(t => t.name === 't-2')
 
 * 4. 重构theme接口
 ```js
-// model/theme.js
+// models/theme.js
 import {
   Http
 } from '../utils/http'
@@ -618,7 +618,7 @@ Component({
 
 * 5. 获取数据
 ```js
-// model/banner.js
+// models/banner.js
 class Banner {
   static hotList   = 'b-2'
 
@@ -738,7 +738,7 @@ observers: {
 
 * 6. 数据模型
 ```js
-// model >> spu-paging.js
+// models >> spu-paging.js
 /**
  * 关于分页数据
  */
@@ -772,7 +772,7 @@ export {
 * 8. 首页调用
 ```js
 // home.js
-import {spuPaging} from '../../model/spu-paging'
+import {spuPaging} from '../../models/spu-paging'
 // ...
   /**
    * 生命周期函数--监听页面加载
@@ -974,9 +974,119 @@ module.exports = {
 
 * 12. 调整一次加载瀑布流显示数
 
+## 详情页
+
+> 流程： home首页点击商品跳转对应详情页，detail页面获取参数pid，根据pid加载数据，再通过setData将详情信息传递到realm组件。
+
+* 1. 获取商品id
+```js
+  onLoad: function (options) {
+    const pid = options.pid
+  },
+```
+
+* 2. spu-preview组件添加跳转商品详情
+
+* 3. 新建detail详情页
+
+* 4. 分析及拆分详情页
+
+* 5. 新建realm组件
+
+* 6. 新建fence组件
+
+* 7. 新建fence组件models（fence.js与fence-group.js）
+
+* 8. 新建spu模型调用数据
+```js
+// models/spu.js
+// 获取商品详情
+import {Http} from '../utils/http'
+
+class Spu {
+  static getDetail(id) {
+    return Http.request({
+      url: `spu/id/${id}/detail`
+    })
+  }
+}
+
+export {
+  Spu
+}
+
+// ===========================
+// detail.js
+  onLoad: async function (options) {
+    const pid = options.pid
+    const spu = await Spu.getDetail(pid)
+
+    this.setData({
+      spu
+    })
+  },
+```
+
+* 9. detail页面调用realm组件
+`<s-realm></s-realm>`
+
+```json
+{
+  "usingComponents": {
+    "s-realm": "/components/realm/index"
+  }
+}
+```
+
+* 10. realm组件添加spu
+```js
+// realm/index.js
+  properties: {
+    spu: Object
+  },
+```
+
+* 11. observers监听spu数据
+```js
+// realm/index.js
+  observers: {
+    'spu': function(spu) {
+      if(!spu) {
+        return
+      }
+    }
+  },
+```
+
+* 12. 提取全部规格值
+> components/models/fence-group.js
+
+* 13. 新建矩阵方法
+> matrix.js
+
+* 14. 定义每一行规格
+> fence.js
+
+* 15. fence的实例化
+
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位
+
+## 线性代数 矩阵
+
+```
+金属灰  七龙珠   小号S
+青芒色  灌篮高手 中号M
+青芒色  圣斗士   大号L
+橘黄色  七龙珠   小号S
+```
+
+* 转置
+> a[1, 0]  b[0, 1]
+
+* 旋转
 
 ## git 远程分支上传
 ```

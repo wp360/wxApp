@@ -2,7 +2,7 @@
 <!--引入价格wxs-->
 <wxs src="../../wxs/price.wxs" module="p"></wxs>
 
-<view class="container">
+<view data-pid="{{data.id}}" bind:tap="onItemTap" class="container">
   <!-- mode="widthFix" class="img" -->
   <image bind:load="onImgLoad" style="width: {{w}}rpx;height:{{h}}rpx;" src="{{data.img}}"></image>
   <view class="content-container">
