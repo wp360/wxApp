@@ -10,7 +10,7 @@ class FenceGroup {
 
   constructor(spu) {
     this.spu = spu
-    this.skuList = spu.spu_list
+    this.skuList = spu.sku_list
   }
 
   initFences() {
@@ -18,7 +18,7 @@ class FenceGroup {
     const fences = []
     // 标记列号
     let currentJ = -1
-
+    console.log(matrix)
     // for
     // element代表矩阵每一个元素，i代表元素在矩阵里的行号，j代表元素在矩阵里的列号
     matrix.forEach((element, i, j) => {
@@ -31,6 +31,7 @@ class FenceGroup {
       }
       fences[currentJ].pushValueTitle(element.value)
     })
+    console.log(fences)
   }
 
   // 私有方法添加下划线_
@@ -44,6 +45,7 @@ class FenceGroup {
 
   _createMatrix(skuList) {
     const m = []
+    console.log(skuList)
     skuList.forEach(sku => {
       m.push(sku.specs)
     })

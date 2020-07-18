@@ -4,7 +4,7 @@
     <image></image>
   </view>
   <!-- 规格： 颜色、款式、尺码 -->
-  <block wx:for="{{items}}">
+  <block wx:for="{{}}">
     <s-fence></s-fence>
   </block>
   <!-- 数量 -->

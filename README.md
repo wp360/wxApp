@@ -1069,6 +1069,23 @@ export {
 
 * 15. fence的实例化
 
+* 16. 调用initFences方法
+```js
+// components/realm/index.js
+  observers: {
+      //...
+
+      const fenceGroup = new FenceGroup(spu)
+      fenceGroup.initFences()
+    }
+  },
+
+```
+
+* 17. 详情页显示数据
+```
+<s-realm spu="{{spu}}"></s-realm>
+```
 
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
