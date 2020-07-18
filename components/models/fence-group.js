@@ -18,7 +18,7 @@ class FenceGroup {
     const fences = []
     // 标记列号
     let currentJ = -1
-    console.log(matrix)
+    // console.log(matrix)
     // for
     // element代表矩阵每一个元素，i代表元素在矩阵里的行号，j代表元素在矩阵里的列号
     matrix.forEach((element, i, j) => {
@@ -31,7 +31,21 @@ class FenceGroup {
       }
       fences[currentJ].pushValueTitle(element.value)
     })
-    console.log(fences)
+    // console.log(fences)
+  }
+
+  // 使用矩阵转置方法
+  initFences2() {
+    const matrix = this._createMatrix(this.skuList)
+    const fences = []
+    const AT = matrix.transpose()
+    // console.log(AT)
+    AT.forEach(r=> {
+      const fence = new Fence(r)
+      fence.init()
+      fences.push(fence)
+    })
+    // console.log(fences)
   }
 
   // 私有方法添加下划线_
@@ -45,7 +59,7 @@ class FenceGroup {
 
   _createMatrix(skuList) {
     const m = []
-    console.log(skuList)
+    // console.log(skuList)
     skuList.forEach(sku => {
       m.push(sku.specs)
     })

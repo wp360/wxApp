@@ -27,6 +27,22 @@ class Matrix {
       }
     }
   }
+
+  // numpy
+  // 矩阵转置
+  transpose() {
+    // 转置后的数组
+    const desArr = [] // [[], [], []]
+    // 外层确定行
+    for (let j = 0; j < this.colsNum; j++) {
+      desArr[j] = []
+      for (let i = 0; i < this.rowsNum; i++) {
+        desArr[j][i] = this.m[i][j]
+      }
+    }
+    return desArr
+  }
+
 }
 
 export {

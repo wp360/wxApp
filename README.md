@@ -1087,6 +1087,69 @@ export {
 <s-realm spu="{{spu}}"></s-realm>
 ```
 
+* 18. 矩阵的转置
+```js
+// components/models/matrix.js
+// numpy
+// ...
+  // 矩阵转置
+  transpose() {
+    // 转置后的数组
+    const desArr = [] // [[], [], []]
+    // 外层确定行
+    for (let j = 0; j < this.colsNum; j++) {
+      desArr[j] = []
+      for (let i = 0; i < this.rowsNum; i++) {
+        desArr[j][i] = this.m[i][j]
+      }
+    }
+    return desArr
+  }
+
+// ============================================
+// components/models/fence-group.js
+  initFences2() {
+    const matrix = this._createMatrix(this.skuList)
+    const fences = []
+    const AT = matrix.transpose()
+    console.log(AT)
+    AT.forEach(r=> {
+      const fence = new Fence(r)
+      fence.init()
+      fences.push(fence)
+    })
+    console.log(fences)
+  }
+
+// ============================================
+// components/models/fence.js
+class Fence {
+  // ...
+  specs
+
+  // 构造函数
+  // 一组规格specs
+  constructor(specs) {
+    this.specs = specs
+  }
+
+  init() {
+    this.specs.forEach(s => {
+      this.pushValueTitle(s.value)
+    })
+  }
+  // ...
+
+// ============================================
+// components/realm/index.js
+  observers: {
+    // ...
+      fenceGroup.initFences2()
+    }
+  },
+```
+
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位
