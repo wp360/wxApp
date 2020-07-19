@@ -21,7 +21,7 @@ class FenceGroup {
     // console.log(matrix)
     // for
     // element代表矩阵每一个元素，i代表元素在矩阵里的行号，j代表元素在矩阵里的列号
-    matrix.forEach((element, i, j) => {
+    matrix.each((element, i, j) => {
       // 判断是否开启新列
       if(currentJ !== j) {
         currentJ = j

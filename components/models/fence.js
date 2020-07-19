@@ -1,10 +1,10 @@
  /**
   * 每行规格
   */
+import {Cell} from './cell'
 
 class Fence {
-  // 名称
-  valueTitles = []
+  cells = []
   specs
 
   // 构造函数
@@ -15,12 +15,9 @@ class Fence {
 
   init() {
     this.specs.forEach(s => {
-      this.pushValueTitle(s.value)
+      const cell = new Cell(s)
+      this.cells.push(cell)
     })
-  }
-
-  pushValueTitle(title) {
-    this.valueTitles.push(title)
   }
 }
 

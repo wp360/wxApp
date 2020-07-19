@@ -18,7 +18,7 @@ class Matrix {
     return this.m[0].length
   }
 
-  forEach(callback) {
+  each(callback) {
     // return
     for (let j = 0; j < this.colsNum; j++) {
       for (let i = 0; i < this.rowsNum; i++) {

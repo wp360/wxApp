@@ -1149,6 +1149,54 @@ class Fence {
   },
 ```
 
+* 19. 构建cell对象
+```js
+// components/models/cell.js
+class Cell {
+  title
+
+  constructor(spec) {
+    this.title = spec.value
+  }
+}
+
+export {
+  Cell
+}
+// ==========================
+// components/models/fence.js
+import {Cell} from './cell'
+
+class Fence {
+  // 名称
+  // valueTitles = [] // [{}, {}, {}]
+  cells = []
+  specs
+
+  // 构造函数
+  // 一组规格specs
+  constructor(specs) {
+    this.specs = specs
+  }
+
+  init() {
+    this.specs.forEach(s => {
+      // this.pushValueTitle(s.value)
+      const cell = new Cell(s)
+      this.cells.push(cell)
+    })
+  }
+
+  // pushValueTitle(title) {
+  //   this.valueTitles.push(title)
+  // }
+}
+
+export {
+  Fence
+}
+```
+
 
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
