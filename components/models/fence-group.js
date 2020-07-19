@@ -45,7 +45,7 @@ class FenceGroup {
       fence.init()
       fences.push(fence)
     })
-    // console.log(fences)
+    console.log(fences)
   }
 
   // 私有方法添加下划线_

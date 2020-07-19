@@ -1197,6 +1197,38 @@ export {
 }
 ```
 
+* 20. Fence与规格名的对应关系
+```js
+// components/models/fence.js
+  id
+  title
+
+  // 构造函数
+  // 一组规格specs
+  constructor(specs) {
+    this.specs = specs
+    this.id = specs[0].key_id
+    this.title = specs[0].key
+  }
+
+// ================================
+// components/models/cell.js
+class Cell {
+  id
+  title
+
+  constructor(spec) {
+    this.id = spec.value_id
+    this.title = spec.value
+  }
+}
+
+export {
+  Cell
+}
+```
+
+* 21. cell去重
 
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
