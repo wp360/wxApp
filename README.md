@@ -1230,6 +1230,105 @@ export {
 
 * 21. cell去重
 
+* 22. Cell自定义组件
+```js
+// components/models/fence-group.js
+  fences = []
+
+  initFences2() {
+    // ...
+    this.fences = fences
+  }
+
+// ================================
+// components/realm/index.js
+  observers: {
+    'spu': function(spu) {
+      // ...
+      this.bindInitData(fenceGroup)
+    }
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    bindInitData(fenceGroup) {
+      this.setData({
+        fences: fenceGroup.fences
+      })
+    }
+  }
+
+// =================================
+// components/fetch/index.js
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    fence: Object
+  }
+})
+
+```
+
+```
+<!-- components/realm/index.wxml -->
+  <block wx:for="{{fences}}" wx:key="{{index}}">
+    <s-fence fence="{{item}}"></s-fence>
+  </block>
+
+<!-- components/fetch/index.wxml -->
+<view class="container">
+  <view class="title">
+    {{fence.title}}
+  </view>
+  <view>
+    <block wx:for="{{fence.cells}}" wx:key="{{fence.id}}">
+    </block>
+  </view>
+</view>
+
+```
+> 新建cell文件夹及组件
+```js
+// components/cell/index.js
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    cell: Object
+  }
+})
+
+```
+
+```
+<!--components/cell/index.wxml-->
+<view class="container">
+  <view class="inner-container">
+    <text>{{cell.title}}</text>
+  </view>
+</view>
+
+// ================================
+// components/fence/index.json
+{
+  "component": true,
+  "usingComponents": {
+    "s-cell": "/components/cell/index"
+  }
+}
+
+// ================================
+<!--components/fetch/index.wxml-->
+  <block wx:for="{{fence.cells}}" wx:key="{{index}}">
+    <s-cell cell="{{item}}"></s-cell>
+  </block>
+```
+
 ## SPU、SKU的概念
 > SPU = Standard Product Unit 标准化产品单元
 > SKU = Stock Keeping Unit 库存量单位

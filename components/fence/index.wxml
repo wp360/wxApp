@@ -1,4 +1,11 @@
 <!--components/fetch/index.wxml-->
 <view class="container">
-  <view class="title"></view>
+  <view class="title">
+    {{fence.title}}
+  </view>
+  <view>
+    <block wx:for="{{fence.cells}}" wx:key="{{index}}">
+      <s-cell cell="{{item}}"></s-cell>
+    </block>
+  </view>
 </view>
