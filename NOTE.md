@@ -69,3 +69,23 @@
 * 静态网页开发、UI设计稿100%还原
 * 考虑网页的自适应
 * 考虑网页的兼容性
+
+## 项目开发
+
+* 1. 页面构建
+> pages >> index、activity、pay
+
+* 2. 路由设置
+
+## 公众号测试号注册链接
+
+[https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
+
+## 微信授权流程
+
+> 概念理解
+
+* 业务域名、js接口安全域名、网页授权域名
+* 开发者工具（添加开发者微信号）、人员设置（添加运营者微信号）
+* 网页授权access_token和普通access_token
+* UnionID
