@@ -89,3 +89,39 @@
 * 开发者工具（添加开发者微信号）、人员设置（添加运营者微信号）
 * 网页授权access_token和普通access_token
 * UnionID
+
+> 授权流程
+
+* 用户同意授权，获取code
+* 通过code换取网页授权access_token
+* 拉取用户信息（需scope为snsapi_userinfo）
+
+> JSSDK调用流程
+
+* 绑定域名
+* 引入JS文件
+* 通过config接口注入权限验证配置（接口签名）
+* 通过ready接口处理成功验证
+
+```js
+encodeURIComponent('http://m.51purse.com/#/index')
+// >> "http%3A%2F%2Fm.51purse.com%2F%23%2Findex"
+```
+
+## H5添加接口代理、域名解析
+
+> Host域名解析
+
+* Window: C:\Windows\System32\drivers\etc\HOSTS
+* MAC: vi /etc/hosts
+
+> 代理
+
+* 新建vue.config.js
+
+> H5接入微信
+
+* 定义请求地址
+* 微信授权、注入openid
+* 获取签名信息配置config
+* 定义分享公共信息

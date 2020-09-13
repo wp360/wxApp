@@ -8,12 +8,16 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 // router
 import router from './router/index'
+// cookie
+import VueCookie from 'vue-cookie'
 // 通用样式
+import './assets/css/base.css'
 import './assets/css/common.css'
 
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
+Vue.use(VueCookie)
 
 // axios请求拦截器
 axios.interceptors.request.use(() => {
