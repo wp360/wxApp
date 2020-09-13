@@ -29,3 +29,43 @@
 * 开发规范定义
 * 环境设置、统一请求处理、错误机制、Loading机制
 * 组件封装
+
+## H5响应式方案设计
+
+> PC响应式
+
+* 媒体查询
+* flex、百分比
+* 栅格布局
+
+> 媒体查询
+
+* @media screen and (max-width: 768px)
+* @media screen and (min-width: 768px) and (max-width: 1280px)
+* @media screen and (min-width: 1281px) and (max-width: 1600px)
+* @media screen and (min-width: 1600px)
+
+> H5响应式
+
+* 字体大小
+* 元素大小、布局
+* 元素边距、内填充
+
+> 相关方案
+
+* [https://github.com/amfe/lib-flexible](https://github.com/amfe/lib-flexible)
+* 对视图进行放大缩小
+* rem+flex
+* 媒体查询+百分比+flex
+
+> Rem布局方案
+
+* viewport 视窗
+* 物理像素和网页像素
+* 设计尺寸和开发尺寸
+
+## UI设计稿还原
+
+* 静态网页开发、UI设计稿100%还原
+* 考虑网页的自适应
+* 考虑网页的兼容性
