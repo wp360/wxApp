@@ -27,7 +27,7 @@ axios.interceptors.request.use(() => {
 // axios响应拦截器
 axios.interceptors.response.use((response) => {
   let res = response.data
-  if(res.code != 0) {
+  if (res.code !== 0) {
     alert(res.message)
   }
 }, (error) => {
