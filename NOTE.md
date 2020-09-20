@@ -125,3 +125,17 @@ encodeURIComponent('http://m.51purse.com/#/index')
 * 微信授权、注入openid
 * 获取签名信息配置config
 * 定义分享公共信息
+
+## 参考文档
+
+[https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html)
+
+## Express项目创建
+
+> 初始化Express项目
+
+* npm install express-generator -g
+* express -h
+* express pay_server
+* cd pay_server && npm install
+* npm i & node bin/www || pm2 start bin/www
